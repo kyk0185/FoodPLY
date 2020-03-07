@@ -1,17 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { View, Image } from 'react-native';
 import { Container, Content, Footer, Button, Text, Right, List, ListItem, Left, FooterTab } from 'native-base';
 import { AntDesign } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 
-class ShoppingCart extends Component {
+class GoToOrder extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            isLogin: false
-        }
-        console.log(props.cartItems.geoItems['geoData'])
-
     }
     renderSection2 = () => {
         let temp = 0
@@ -22,53 +17,13 @@ class ShoppingCart extends Component {
             <Text style={{ fontWeight: 'bold', color: 'white', marginRight: 20 }}>{temp}원</Text>
         )
     }
-    goToOrder = () => {
-        if (this.props.cartItems.geoItems['geoData'] == "") {
-            alert('배송지 설정 해주세요.')
-            this.props.navigation.navigate('Home')
-        } else if (this.state.isLogin = false) {
-            alert('로그인 해주세요.')
-            this.props.navigation.navigate('LoginAnJoin')
-        } else {
-            this.props.navigation.navigate('GoToOrder')
-        }
-
-    }
-    async getUserInfo() {
-        try {
-            await AsyncStorage.getItem('isLogin', (err, result) => {
-                const data = JSON.parse(result)
-                if (data !== null) {
-                    this.setState({ isLogin: data.isLogin })
-                } else {
-                    this.setState({ isLogin: false })
-                }
-            })
-        } catch (error) {
-            console.log("getUserInfo error: ", error.message);
-            throw error;
-        }
-    }
-    onLoad() {
-        this.getUserInfo();
-    }
-    componentDidMount = () => {
-        this.props.navigation.addListener('focus', () => {
-            this.onLoad();
-        });
-        this.onLoad();
-    }
-
     render() {
         return (
             <Container>
                 <Content>
                     <List>
                         <ListItem>
-                            <Left>
-                                <Image source={{ uri: this.props.route.params.uri }} style={{ width: 110, height: 110 }} />
-                                <Text style={{ fontWeight: '600', fontSize: 20, marginLeft: 20 }}>{this.props.route.params.cartTitle}</Text>
-                            </Left>
+                            <Text style={{ fontWeight: '600', fontSize: 20, marginLeft: 20 }}>주문목록</Text>
                         </ListItem>
                     </List>
                     {this.props.cartItems.carItems.map((dish, index) => {
@@ -106,15 +61,15 @@ class ShoppingCart extends Component {
                 <Footer>
                     <FooterTab>
                         <Button active onPress={() => this.props.navigation.goBack()}>
-                            <Text style={{ fontSize: 13, fontWeight: 'bold' }}>주문추가하기</Text>
+                            <Text style={{ fontSize: 13, fontWeight: 'bold' }}>취소하기</Text>
                         </Button>
-                        <Button dark onPress={this.goToOrder}>
-                            <Text style={{ fontSize: 13, fontWeight: 'bold', color: 'white' }}>주문하기</Text>
+                        <Button dark>
+                            <Text style={{ fontSize: 13, fontWeight: 'bold', color: 'white' }}>결제하기</Text>
                         </Button>
                     </FooterTab>
                 </Footer>
             </Container>
-        )
+        );
     }
 }
 const mapStateToProps = (state) => {
@@ -128,4 +83,4 @@ const mapDispatchProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchProps)(ShoppingCart)
+export default connect(mapStateToProps, mapDispatchProps)(GoToOrder)

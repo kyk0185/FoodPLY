@@ -7,6 +7,7 @@ import MainTop from './MainTop';
 import LoginAnJoin from './LoginAnJoin';
 import FoodListDetails from './FoodListDetails'
 import ShoppingCart from './ShoppingCart'
+import GoToOrder from './GoToOrder'
 
 
 const Stack = createStackNavigator();
@@ -21,6 +22,7 @@ export default class App extends Component {
             <Stack.Screen name="Details" component={LoginAnJoin} options={{ title: 'MyPage' }}></Stack.Screen>
             <Stack.Screen name="FoodListDetails" component={FoodListDetails} options={{ title: 'Details' }}></Stack.Screen>
             <Stack.Screen name="ShoppingCart" component={ShoppingCart} options={{ title: 'ShoppingCart' }}></Stack.Screen>
+            <Stack.Screen name="GoToOrder" component={GoToOrder} options={{ title: 'GoToOrder' }}></Stack.Screen>
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
