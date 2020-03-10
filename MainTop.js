@@ -1,12 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions, ScrollView, ImageBackground, AsyncStorage, Modal, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions, ScrollView, Modal, TouchableHighlight } from 'react-native';
 import { Container, Content, Footer, Button, Left, List, ListItem, Body } from 'native-base';
-import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import MapView from 'react-native-maps';
 import FoodList from './FoodList';
 import { TextInput } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
-
 const { width, height } = Dimensions.get('window');
 const GEOCODE_APPID = 'AIzaSyAopuo3k6pzMfUM6MdRuoKqCjfKPeLJ1IY';
 
@@ -15,11 +14,9 @@ class MainTop extends React.Component {
         super(props);
         console.log(props)
         this.state = {
-            sideMenu: props.sideMenu,
             loginMenu: false,
             loading: false,
             wether: null,
-            isLogin: false,
             nickName: "",
             modalVisible: false,
             region: {
@@ -30,40 +27,9 @@ class MainTop extends React.Component {
             locationInfo: null,
             locationData: ""
         }
-
     }
-
-    sideMenuToggle = () => {
-        this.setState({ sideMenu: !this.state.sideMenu })
-    }
-
     LoginAnJoinToggle = () => {
         this.setState({ loginMenu: !this.state.loginMenu })
-    }
-
-    async getUserInfo() {
-        try {
-            await AsyncStorage.getItem('isLogin', (err, result) => {
-                const data = JSON.parse(result)
-                if (data !== null) {
-                    this.setState({ isLogin: data.isLogin })
-                } else {
-                    this.setState({ isLogin: false })
-                }
-            })
-        } catch (error) {
-            console.log("getUserInfo error: ", error.message);
-            throw error;
-        }
-    }
-    onLoad() {
-        this.getUserInfo();
-    }
-    componentDidMount = () => {
-        this.props.navigation.addListener('focus', () => {
-            this.onLoad();
-        });
-        this.onLoad();
     }
 
     setModalVisible() {
@@ -93,7 +59,7 @@ class MainTop extends React.Component {
             <Container style={styles.container} >
                 <Content>
                     <View flexDirection={'row'}>
-                        <TouchableOpacity onPress={this.sideMenuToggle}>
+                        <TouchableOpacity onPress={() => this.props.navigation.openDrawer()}>
                             <Image style={styles.menuIcon} source={require('./assets/menu_icon.png')}></Image>
                         </TouchableOpacity>
                         <Text style={styles.title}>FOOD♬LY</Text>
@@ -112,31 +78,6 @@ class MainTop extends React.Component {
                     <ScrollView>
                         <FoodList />
                     </ScrollView>
-                    {
-                        this.state.sideMenu &&
-                        <View style={{ position: 'absolute', width: '100%', height: '100%', flexDirection: 'row' }} >
-                            <ImageBackground source={{
-                                uri: 'https://post-phinf.pstatic.net/MjAxNzEyMjBfMTAy/MDAxNTEzNzUxODY3NDg3.yhuQ6AD6EM3Er4MvNmqbJ8GFGbJTO07kWpI7FpBjwwkg.4-YFyjnge1WkeQf_F6rKBw7wXoIiGQxamB0oxKjaDuMg.PNG/20171220_1537051.png?type=w1200'
-                            }} style={{ width: 370, height: height, flex: 1 }}
-                                resizeMode={'cover'}>
-                                <View style={{ marginTop: 100, alignItems: 'center' }}>
-                                    {this.state.isLogin ?
-                                        <Button light onPress={() => this.props.navigation.navigate('Details')}><Text>마이페이지</Text></Button>
-                                        :
-                                        <Button light onPress={() => this.props.navigation.navigate('Details')}><Text>로그인/회원가입</Text></Button>
-                                    }
-                                    <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'white', marginTop: 20 }}>장바구니</Text>
-                                    <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'white', marginTop: 20 }}>최근 본 맛집</Text>
-                                    <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'white', marginTop: 20 }}>프로모션 코드</Text>
-                                    <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'white', marginTop: 20 }}>고객센터</Text>
-                                    <Image source={{ uri: 'https://www.iminju.net/news/photo/201708/29896_31813_426.jpg' }} style={{ width: 369, height: 80, marginTop: 20 }} resizeMode={'stretch'} />
-                                </View>
-                            </ImageBackground>
-                            <TouchableOpacity onPress={this.sideMenuToggle} style={{ height: height, width: '10%', backgroundColor: 'rgba(240, 240, 240, 0.5)' }} >
-                            </TouchableOpacity>
-                        </View>
-
-                    }
                 </Content>
                 <Footer style={{ backgroundColor: 'white' }}>
                     <Left style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -156,7 +97,6 @@ class MainTop extends React.Component {
                         }}>
                         <View style={{ position: 'absolute', width: width, height: height }}>
                             <MapView style={{ width: width, height: height }}
-
                                 region={this.state.region}
                                 zoomEnabled={true}
                                 scrollEnabled={true}>

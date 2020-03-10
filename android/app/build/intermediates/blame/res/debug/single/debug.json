@@ -2008,6 +2008,10 @@
         "source": "C:\\Users\\asus\\.gradle\\caches\\transforms-1\\files-1.1\\material-1.0.0.aar\\9ac6eed7fcdfc82540aae63e4f6a16ee\\res\\color\\mtrl_bottom_nav_colored_item_tint.xml"
     },
     {
+        "merged": "C:\\Users\\asus\\Desktop\\myproject2\\myproject\\android\\app\\build\\intermediates\\res\\merged\\debug\\xml_file_provider_paths.xml.flat",
+        "source": "C:\\Users\\asus\\Desktop\\myproject2\\myproject\\node_modules\\react-native-webview\\android\\build\\intermediates\\packaged_res\\debug\\xml\\file_provider_paths.xml"
+    },
+    {
         "merged": "C:\\Users\\asus\\Desktop\\myproject2\\myproject\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_ic_menu_share_mtrl_alpha.png.flat",
         "source": "C:\\Users\\asus\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-1.1.0.aar\\dbdc2175314ff75aafcce2f3fc9e8558\\res\\drawable-xxhdpi-v4\\abc_ic_menu_share_mtrl_alpha.png"
     },

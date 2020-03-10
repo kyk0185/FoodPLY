@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions, TextInput, AsyncStorage } from 'react-native';
+import { StyleSheet, View, Dimensions, AsyncStorage, Modal } from 'react-native';
+import { Container, Content, Button, Text, Form, Label, Item, Input, Picker, Icon } from 'native-base';
 import * as SQLite from 'expo-sqlite';
 
 const db = SQLite.openDatabase("testds.db");
@@ -12,24 +13,36 @@ export default class LoginAnJoin extends React.Component {
         this.state = {
             isLogin: false,
             joinForm: false,
+            id: "",
             email: "",
             password: "",
             passwordConfirm: "",
             nickName: "",
+            phone: "",
             loginForm: false,
             loginDisabled: false,
-            joinDisabled: false
+            joinDisabled: false,
+            birth1: "",
+            birth2: undefined,
+            birth3: "",
+            gender: undefined,
+            modalVisible: false
         }
     }
 
-    loginToggle = () => {
-        this.setState({ loginForm: !this.state.loginForm, joinDisabled: !this.state.joinDisabled })
+    onValueChange2(value: string) {
+        this.setState({ birth2: value })
     }
-
+    onValueChange3(value: string) {
+        this.setState({ gender: value })
+    }
     joinToggle = () => {
-        this.setState({ joinForm: !this.state.joinForm, loginDisabled: !this.state.loginDisabled })
+        this.setState({ joinForm: !this.state.joinForm, modalVisible: !this.state.modalVisible })
     }
 
+    idForm = (text) => {
+        this.setState({ id: text })
+    }
     emailForm = (text) => {
         this.setState({ email: text })
     }
@@ -46,11 +59,48 @@ export default class LoginAnJoin extends React.Component {
         this.setState({ passwordConfirm: text })
     }
 
+    phoneForm = (text) => {
+        this.setState({ phone: text })
+    }
+    birth1Form = (text) => {
+        this.setState({ birth1: text })
+    }
+    birth3Form = (text) => {
+        this.setState({ birth3: text })
+    }
     logout = () => {
-        AsyncStorage.removeItem('isLogin')
+        AsyncStorage.removeItem('userInfo')
         alert('로그아웃 되셨습니다.!')
         this.setState({ isLogin: !this.state.isLogin })
         this.props.navigation.navigate('Home')
+    }
+
+    checkId = () => {
+        const repExp = /^[a-zA-Z]{1}[a-zA-Z0-9_]{4,11}$/;
+
+        const text = repExp.test(this.state.id)
+        if (text == true) {
+            try {
+                let temp = [];
+                temp.push(this.state.id);
+
+                db.transaction(tx => {
+                    tx.executeSql('select * from users where id = ?', temp, (_, { rows }) => {
+                        if (rows.length > 0) {
+                            alert('중복된 아이디 입니다.')
+                            this.setState({ id: "" })
+                        } else {
+                            alert('사용 가능한 아이디 입니다.')
+                        }
+                    })
+                })
+            } catch (error) {
+                console.log("Received error: ", error.message);
+                throw error;
+            }
+        } else {
+            alert('올바른 형식에 맞추어 주십시오.')
+        }
     }
 
     checkEmail = () => {
@@ -65,10 +115,10 @@ export default class LoginAnJoin extends React.Component {
                 db.transaction(tx => {
                     tx.executeSql('select * from users where email = ?', temp, (_, { rows }) => {
                         if (rows.length > 0) {
-                            alert('중복된 아이디 입니다.')
+                            alert('중복된 이메일 입니다.')
                             this.setState({ email: "" })
                         } else {
-                            alert('사용 가능한 아이디 입니다.')
+                            alert('사용 가능한 이메일 입니다.')
                         }
                     })
                 })
@@ -121,10 +171,9 @@ export default class LoginAnJoin extends React.Component {
             alert('비밀번호가 일치하지 않습니다.')
         }
     }
-
     async setUserINfo(data) {
         try {
-            await AsyncStorage.setItem('isLogin', JSON.stringify(data))
+            await AsyncStorage.setItem('userInfo', JSON.stringify(data))
         } catch (error) {
             console.log("setUserInfo error: ", error.message);
             throw error;
@@ -133,12 +182,11 @@ export default class LoginAnJoin extends React.Component {
 
     async getUserInfo() {
         try {
-            await AsyncStorage.getItem('isLogin', (err, result) => {
+            await AsyncStorage.getItem('userInfo', (err, result) => {
                 const data = JSON.parse(result)
                 console.log(data)
                 if (data !== null) {
-                    this.setState({ isLogin: data.isLogin })
-                    this.setState({ nickName: data.nickName })
+                    this.setState({ isLogin: data.isLogin, nickName: data.nickName, email: data.email })
                 }
             })
         } catch (error) {
@@ -151,22 +199,27 @@ export default class LoginAnJoin extends React.Component {
     }
 
     loginSubmit = () => {
-        if (this.state.email !== "" & this.state.password !== "") {
+        if (this.state.id !== "" & this.state.password !== "") {
             try {
                 let temp = [];
-                temp.push(this.state.email)
+                temp.push(this.state.id)
 
                 db.transaction(tx => {
-                    tx.executeSql('SELECT * FROM users WHERE email =?', temp, (_, { rows }) => {
+                    tx.executeSql('SELECT * FROM users WHERE id =?', temp, (_, { rows }) => {
                         if (rows.length > 0) {
                             alert('로그인이 되셨습니다.')
                             let temp = {
                                 nickName: rows.item(0).nickName,
+                                email: rows.item(0).email,
+                                password: rows.item(0).password,
+                                id: rows.item(0).id,
+                                gender: rows.item(0).gender,
+                                phone: rows.item(0).phone,
+                                birthday: rows.item(0).birthday,
                                 isLogin: true
                             };
                             this.setUserINfo(temp);
                             this.props.navigation.navigate('Home')
-                            // this.props.navigation.navigate('Home', { isLogin: true })
                         } else {
                             alert('아이디와 패스워드를 확인 해주세요.')
                         }
@@ -176,19 +229,26 @@ export default class LoginAnJoin extends React.Component {
                 console.log("loginSubmit error: ", error.message);
                 throw error;
             }
+        } else {
+            alert('아이디와 패스워드를 입력해주세요.')
         }
     }
 
     joinSubmit = () => {
-        if (this.state.email !== "" & this.state.nickName !== "" & this.state.password != "") {
+        if (this.state.email !== "" & this.state.nickName !== "" & this.state.password != "" & this.state.id != "" & this.state.gender != "" & this.state.phone != ""
+            & this.state.birth1 !== "" & this.state.birth2 !== "" & this.state.birth3 !== "") {
             try {
                 let temp = [];
                 temp.push(this.state.email);
                 temp.push(this.state.nickName);
                 temp.push(this.state.password);
+                temp.push(this.state.id);
+                temp.push(this.state.gender);
+                temp.push(this.state.phone);
+                temp.push(this.state.birth1 + this.state.birth2 + this.state.birth3);
 
                 db.transaction(tx => {
-                    tx.executeSql(`INSERT INTO users (email,nickName,password) VALUES (?,?,?);`, temp, (tx, results) => {
+                    tx.executeSql(`INSERT INTO users (email,nickName,password,id,gender,phone,birthday) VALUES (?,?,?,?,?,?,?);`, temp, (tx, results) => {
                         if (results.rowsAffected > 0) {
                             alert('회원이 등록 되셨습니다.')
                             this.setState({ email: "", nickName: "", password: "", passwordConfirm: "", joinForm: !this.state.joinForm, loginDisabled: !this.state.loginDisabled })
@@ -212,8 +272,8 @@ export default class LoginAnJoin extends React.Component {
                 // tx.executeSql('drop table users', [], (tx, results) => {
                 //     console.log('drop')
                 // })
-                tx.executeSql('create table if not exists users(email TEXT, nickName TEXT, password TEXT)', [], (tx, results) => {
-                    // console.log('create')
+                tx.executeSql('create table if not exists users(id TEXT, email TEXT, nickName TEXT, password TEXT,phone TEXT,birthday TEXT,gender TEXT)', [], (tx, results) => {
+                    console.log('create')
                 })
             })
         } catch (error) {
@@ -221,71 +281,129 @@ export default class LoginAnJoin extends React.Component {
         }
         this.onLoad();
     }
+
     render() {
         return (
-            <View style={{ position: 'absolute', width: '100%', height: '100%' }}>
-                <View>
+            <Container style={{ position: 'absolute', width: '100%', height: '100%' }}>
+                <Content>
                     <View style={{ width: width, height: '15%', backgroundColor: '#81BEF7', alignItems: 'center', justifyContent: 'center' }}>
                         <Text style={{ fontSize: 35 }}>FOOD♬LY</Text>
                         <Text>푸드플라이로 로그인</Text>
                     </View>
                     {this.state.isLogin ?
                         <View style={{ width: width, height: height, alignItems: 'center', backgroundColor: 'white' }}>
-                            <Text style={{ fontSize: 20, marginTop: 20 }}>{this.state.nickName} 고객님 환영합니다.!</Text>
-                            <TouchableOpacity style={{ width: 200, height: 40, marginTop: 20, borderColor: '#d6d7da', borderRadius: 15, borderWidth: 2, justifyContent: 'center' }} onPress={this.logout}>
-                                <Text style={{ textAlign: 'center' }}>로그아웃</Text>
-                            </TouchableOpacity>
+                            <Text style={{ fontSize: 20, marginTop: 20, marginBottom: 20 }}>{this.state.nickName} 고객님 환영합니다.!</Text>
+                            <Button onPress={this.logout} block>
+                                <Text>로그아웃</Text>
+                            </Button>
                         </View>
                         :
                         <View style={{ width: width, height: height, alignItems: 'center', backgroundColor: 'white' }}>
-                            <TouchableOpacity style={{ width: 200, height: 40, marginTop: 10, borderColor: '#d6d7da', borderRadius: 15, borderWidth: 2, justifyContent: 'center' }} onPress={this.loginToggle} disabled={this.state.loginDisabled}>
-                                <Text style={{ textAlign: 'center' }}>로그인</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={{ width: 200, height: 40, marginTop: 5, borderColor: '#d6d7da', borderRadius: 15, borderWidth: 2, justifyContent: 'center' }} onPress={this.joinToggle} disabled={this.state.joinDisabled}>
-                                <Text style={{ textAlign: 'center' }}>회원가입</Text>
-                            </TouchableOpacity>
+                            <Form style={{ marginTop: 10 }}>
+                                <Item stackedLabel>
+                                    <Label>아이디</Label>
+                                    <Input onChangeText={this.idForm} value={this.state.id} />
+                                </Item>
+                                <Item stackedLabel>
+                                    <Label>비밀번호</Label>
+                                    <Input onChangeText={this.passwordForm} value={this.state.password} secureTextEntry={true} />
+                                </Item>
+                                <Button onPress={this.loginSubmit} block>
+                                    <Text>로그인</Text>
+                                </Button>
+                                <Button onPress={this.joinToggle} disabled={this.state.joinDisabled} block info>
+                                    <Text>회원가입</Text>
+                                </Button>
+                            </Form>
                             {this.state.joinForm &&
-                                <View style={{ marginTop: 10 }}>
-                                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                                        <Text>아이디</Text>
-                                        <TextInput style={{ width: 200, height: 40, borderColor: 'gray', borderWidth: 1 }} onChangeText={this.emailForm} onSubmitEditing={this.checkEmail} value={this.state.email} placeholder="Email"></TextInput>
-                                    </View>
-                                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                                        <Text>닉네임</Text>
-                                        <TextInput style={{ width: 200, height: 40, borderColor: 'gray', borderWidth: 1, marginTop: 5 }} onChangeText={this.nickNameForm} onSubmitEditing={this.checkNickName} value={this.state.nickName} placeholder="NickName"></TextInput>
-                                    </View>
-                                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                                        <Text>비밀번호</Text>
-                                        <TextInput style={{ width: 200, height: 40, borderColor: 'gray', borderWidth: 1, marginTop: 5 }} onChangeText={this.passwordForm} onSubmitEditing={this.checkPassword} value={this.state.password} placeholder="Password" secureTextEntry={true}></TextInput>
-                                    </View>
-                                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                                        <Text>비밀번호 재확인</Text>
-                                        <TextInput style={{ width: 200, height: 40, borderColor: 'gray', borderWidth: 1, marginTop: 5 }} onChangeText={this.passwordConfirmForm} onSubmitEditing={this.checkPasswordConfirm} value={this.state.passwordConfirm} placeholder="passwordConfirm" secureTextEntry={true}></TextInput>
-                                    </View>
-                                    <TouchableOpacity onPress={this.joinSubmit} style={{ alignSelf: 'center', marginTop: 50, width: 90, height: 25, marginTop: 5, borderColor: '#d6d7da', borderRadius: 15, borderWidth: 2 }}>
-                                        <Text style={{ textAlign: 'center' }}>가입하기</Text>
-                                    </TouchableOpacity>
-                                </View>
-                            }
-                            {this.state.loginForm &&
-                                <View style={{ marginTop: 10 }}>
-                                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                                        <Text>아이디</Text>
-                                        <TextInput style={{ width: 200, height: 40, borderColor: 'gray', borderWidth: 1 }} onChangeText={this.emailForm} value={this.state.email} placeholder="Email"></TextInput>
-                                    </View>
-                                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                                        <Text>비밀번호</Text>
-                                        <TextInput style={{ width: 200, height: 40, borderColor: 'gray', borderWidth: 1, marginTop: 5 }} onChangeText={this.passwordForm} value={this.state.password} placeholder="Password" secureTextEntry={true}></TextInput>
-                                    </View>
-                                    <TouchableOpacity onPress={this.loginSubmit} style={{ alignSelf: 'center', marginTop: 50, width: 90, height: 25, marginTop: 5, borderColor: '#d6d7da', borderRadius: 15, borderWidth: 2 }}>
-                                        <Text style={{ textAlign: 'center' }}>로그인</Text>
-                                    </TouchableOpacity>
-                                </View>
+                                <Modal
+                                    animationType="slide"
+                                    transparent={false}
+                                    visible={this.state.modalVisible}
+                                    onRequestClose={() => {
+                                        alert('Modal has been closed.')
+                                    }}>
+                                    <Form style={{ marginTop: 10 }}>
+                                        <Item stackedLabel>
+                                            <Label>아이디</Label>
+                                            <Input onChangeText={this.idForm} onSubmitEditing={this.checkId} value={this.state.id} />
+                                        </Item>
+                                        <Item stackedLabel>
+                                            <Label>비밀번호</Label>
+                                            <Input onChangeText={this.passwordForm} onSubmitEditing={this.checkPassword} value={this.state.password} secureTextEntry={true} />
+                                        </Item>
+                                        <Item stackedLabel>
+                                            <Label>비밀번호 재확인</Label>
+                                            <Input onChangeText={this.passwordConfirmForm} onSubmitEditing={this.checkPasswordConfirm} value={this.state.passwordConfirm} secureTextEntry={true} />
+                                        </Item>
+                                        <Item stackedLabel>
+                                            <Label>이름</Label>
+                                            <Input onChangeText={this.nickNameForm} onSubmitEditing={this.checkNickName} value={this.state.nickName} />
+                                        </Item>
+                                        <Item stackedLabel>
+                                            <Label>이메일</Label>
+                                            <Input onChangeText={this.emailForm} onSubmitEditing={this.checkEmail} value={this.state.email} />
+                                        </Item>
+                                        <Item stackedLabel>
+                                            <Label>생년월일</Label>
+                                            <View style={{ flexDirection: 'row' }}>
+                                                <Input placeholder="년(4자)" placeholderTextColor="#d3d3d3" onChangeText={this.birth1Form} value={this.state.birth1} />
+                                                <Picker
+                                                    mode="dropdown"
+                                                    iosIcon={<Icon name="arrow-down" />}
+                                                    style={{ width: undefined }}
+                                                    placeholder="월"
+                                                    placeholderTextColor="#d3d3d3"
+                                                    selectedValue={this.state.birth2}
+                                                    onValueChange={this.onValueChange2.bind(this)}>
+
+                                                    <Picker.Item label="1월" value="01" />
+                                                    <Picker.Item label="2월" value="02" />
+                                                    <Picker.Item label="3월" value="03" />
+                                                    <Picker.Item label="4월" value="04" />
+                                                    <Picker.Item label="5월" value="05" />
+                                                    <Picker.Item label="6월" value="06" />
+                                                    <Picker.Item label="7월" value="07" />
+                                                    <Picker.Item label="8월" value="08" />
+                                                    <Picker.Item label="9월" value="09" />
+                                                    <Picker.Item label="10월" value="10" />
+                                                    <Picker.Item label="11월" value="11" />
+                                                    <Picker.Item label="12월" value="12" />
+                                                </Picker>
+                                                <Input placeholder="일" placeholderTextColor="#d3d3d3" onChangeText={this.birth3Form} value={this.state.birth3} />
+                                            </View>
+                                        </Item>
+                                        <Item stackedLabel>
+                                            <Label>성별</Label>
+                                            <View style={{ flexDirection: 'row' }}>
+                                                <Picker
+                                                    mode="dropdown"
+                                                    iosIcon={<Icon name="arrow-down" />}
+                                                    style={{ width: undefined }}
+                                                    placeholder="성별"
+                                                    placeholderTextColor="#d3d3d3"
+                                                    selectedValue={this.state.gender}
+                                                    onValueChange={this.onValueChange3.bind(this)}>
+
+                                                    <Picker.Item label="남자" value="key0" />
+                                                    <Picker.Item label="여자" value="key1" />
+                                                </Picker>
+                                            </View>
+                                        </Item>
+                                        <Item stackedLabel last>
+                                            <Label>휴대전화</Label>
+                                            <Input placeholder="(-)빼고 입력해주세요." placeholderTextColor="#d3d3d3" onChangeText={this.phoneForm} onSubmitEditing={this.checkPhone} value={this.state.phone} />
+                                        </Item>
+                                        <Button onPress={this.joinSubmit} block>
+                                            <Text>가입하기</Text>
+                                        </Button>
+                                    </Form>
+                                </Modal>
                             }
                         </View>
                     }
-                </View>
-            </View >
+                </Content>
+            </Container >
         );
     }
 }

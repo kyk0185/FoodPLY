@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:1:1-50:12
-INJECTED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:1:1-50:12
-INJECTED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:1:1-50:12
-INJECTED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:1:1-50:12
+ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:1:1-59:12
+INJECTED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:1:1-59:12
+INJECTED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:1:1-59:12
+INJECTED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:1:1-59:12
 MERGED from [:react-native-maps] C:\Users\asus\Desktop\myproject2\myproject\node_modules\react-native-maps\lib\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-12:12
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\play-services-maps-17.0.0.aar\fedd68ddc68b1cd826634d9b5b4df81f\AndroidManifest.xml:17:1-38:12
 MERGED from [:expo-location] C:\Users\asus\Desktop\myproject2\myproject\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-21:12
@@ -12,6 +12,8 @@ MERGED from [:react-native-safe-area-context] C:\Users\asus\Desktop\myproject2\m
 MERGED from [:react-native-screens] C:\Users\asus\Desktop\myproject2\myproject\node_modules\react-native-screens\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-reanimated] C:\Users\asus\Desktop\myproject2\myproject\node_modules\react-native-reanimated\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-gesture-handler] C:\Users\asus\Desktop\myproject2\myproject\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
+MERGED from [:iamport-react-native] C:\Users\asus\Desktop\myproject2\myproject\node_modules\iamport-react-native\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-webview] C:\Users\asus\Desktop\myproject2\myproject\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-23:12
 MERGED from [:expo-permissions] C:\Users\asus\Desktop\myproject2\myproject\node_modules\expo-permissions\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:unimodules-react-native-adapter] C:\Users\asus\Desktop\myproject2\myproject\node_modules\@unimodules\react-native-adapter\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [com.facebook.react:react-native:0.61.5] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\jetified-react-native-0.61.5.aar\72817ad9163e0301c9f59b692295a44c\AndroidManifest.xml:2:1-13:12
@@ -89,20 +91,20 @@ MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\asus\.gradle
 MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\savedstate-1.0.0.aar\0234397404124840e32f5cbffeead082\AndroidManifest.xml:17:1-24:12
 MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\69ad30d5ac1b87103089f7895318d451\AndroidManifest.xml:2:1-30:12
 MERGED from [com.facebook.fresco:fbcore:2.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\jetified-fbcore-2.0.0.aar\b7acdeec24dba004536f9bd96360c95e\AndroidManifest.xml:2:1-9:12
-INJECTED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:1:1-50:12
-INJECTED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:1:1-50:12
-INJECTED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:1:1-50:12
+INJECTED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:1:1-59:12
+INJECTED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:1:1-59:12
+INJECTED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:1:1-59:12
 	package
 		ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:2:5-24
 		INJECTED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:1:1-50:12
+		ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:1:1-59:12
 		INJECTED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:1:1-50:12
+		ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:1:1-59:12
 		INJECTED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:1:11-69
@@ -199,13 +201,15 @@ ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\Andro
 	android:name
 		ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:25:22-70
 application
-ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:28:5-48:19
+ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:28:5-57:19
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\play-services-maps-17.0.0.aar\fedd68ddc68b1cd826634d9b5b4df81f\AndroidManifest.xml:30:5-36:19
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\play-services-maps-17.0.0.aar\fedd68ddc68b1cd826634d9b5b4df81f\AndroidManifest.xml:30:5-36:19
 MERGED from [:expo-location] C:\Users\asus\Desktop\myproject2\myproject\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:5-19:19
 MERGED from [:expo-location] C:\Users\asus\Desktop\myproject2\myproject\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:5-19:19
 MERGED from [com.google.android.gms:play-services-location:17.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\play-services-location-17.0.0.aar\443be290a7a0c21c999cc46fb0e01fd5\AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-location:17.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\play-services-location-17.0.0.aar\443be290a7a0c21c999cc46fb0e01fd5\AndroidManifest.xml:7:5-20
+MERGED from [:react-native-webview] C:\Users\asus\Desktop\myproject2\myproject\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-21:19
+MERGED from [:react-native-webview] C:\Users\asus\Desktop\myproject2\myproject\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-21:19
 MERGED from [com.facebook.react:react-native:0.61.5] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\jetified-react-native-0.61.5.aar\72817ad9163e0301c9f59b692295a44c\AndroidManifest.xml:11:5-20
 MERGED from [com.facebook.react:react-native:0.61.5] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\jetified-react-native-0.61.5.aar\72817ad9163e0301c9f59b692295a44c\AndroidManifest.xml:11:5-20
 MERGED from [com.google.android.material:material:1.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\material-1.0.0.aar\9ac6eed7fcdfc82540aae63e4f6a16ee\AndroidManifest.xml:22:5-20
@@ -249,7 +253,7 @@ MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\asus\.gradle\cache
 	android:name
 		ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:29:7-38
 activity#com.walab.MainActivity
-ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:35:7-44:18
+ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:35:7-53:18
 	android:label
 		ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:37:9-41
 	android:windowSoftInputMode
@@ -268,16 +272,34 @@ category#android.intent.category.LAUNCHER
 ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:42:13-73
 	android:name
 		ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:42:23-70
+intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:scheme:ispmobile
+ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:45:11-52:27
+action#android.intent.action.VIEW
+ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:46:15-67
+	android:name
+		ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:46:23-64
+category#android.intent.category.DEFAULT
+ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:48:15-74
+	android:name
+		ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:48:25-71
+category#android.intent.category.BROWSABLE
+ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:49:15-76
+	android:name
+		ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:49:25-73
+data
+ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:51:15-50
+	android:scheme
+		ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:51:21-47
 activity#com.facebook.react.devsupport.DevSettingsActivity
-ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:45:7-84
+ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:54:7-84
 	android:name
-		ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:45:17-81
+		ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:54:17-81
 meta-data#com.google.android.geo.API_KEY
-ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:46:9-47:78
+ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:55:9-56:78
 	android:value
-		ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:47:21-76
+		ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:56:21-76
 	android:name
-		ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:46:20-65
+		ADDED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml:55:20-65
 uses-sdk
 INJECTED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\asus\Desktop\myproject2\myproject\android\app\src\main\AndroidManifest.xml
@@ -298,6 +320,10 @@ MERGED from [:react-native-reanimated] C:\Users\asus\Desktop\myproject2\myprojec
 MERGED from [:react-native-reanimated] C:\Users\asus\Desktop\myproject2\myproject\node_modules\react-native-reanimated\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-gesture-handler] C:\Users\asus\Desktop\myproject2\myproject\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-gesture-handler] C:\Users\asus\Desktop\myproject2\myproject\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:iamport-react-native] C:\Users\asus\Desktop\myproject2\myproject\node_modules\iamport-react-native\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:iamport-react-native] C:\Users\asus\Desktop\myproject2\myproject\node_modules\iamport-react-native\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-webview] C:\Users\asus\Desktop\myproject2\myproject\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-webview] C:\Users\asus\Desktop\myproject2\myproject\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:expo-permissions] C:\Users\asus\Desktop\myproject2\myproject\node_modules\expo-permissions\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:expo-permissions] C:\Users\asus\Desktop\myproject2\myproject\node_modules\expo-permissions\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:unimodules-react-native-adapter] C:\Users\asus\Desktop\myproject2\myproject\node_modules\@unimodules\react-native-adapter\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
@@ -490,6 +516,22 @@ ADDED from [:expo-location] C:\Users\asus\Desktop\myproject2\myproject\node_modu
 		ADDED from [:expo-location] C:\Users\asus\Desktop\myproject2\myproject\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:13-37
 	android:name
 		ADDED from [:expo-location] C:\Users\asus\Desktop\myproject2\myproject\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:13-78
+provider#com.reactnativecommunity.webview.RNCWebViewFileProvider
+ADDED from [:react-native-webview] C:\Users\asus\Desktop\myproject2\myproject\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:9-20:20
+	android:grantUriPermissions
+		ADDED from [:react-native-webview] C:\Users\asus\Desktop\myproject2\myproject\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:13-47
+	android:authorities
+		ADDED from [:react-native-webview] C:\Users\asus\Desktop\myproject2\myproject\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-64
+	android:exported
+		ADDED from [:react-native-webview] C:\Users\asus\Desktop\myproject2\myproject\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:13-37
+	android:name
+		ADDED from [:react-native-webview] C:\Users\asus\Desktop\myproject2\myproject\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-83
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from [:react-native-webview] C:\Users\asus\Desktop\myproject2\myproject\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:13-19:63
+	android:resource
+		ADDED from [:react-native-webview] C:\Users\asus\Desktop\myproject2\myproject\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:17-60
+	android:name
+		ADDED from [:react-native-webview] C:\Users\asus\Desktop\myproject2\myproject\node_modules\react-native-webview\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:17-67
 uses-permission#android.permission.STORAGE
 ADDED from [:expo-file-system] C:\Users\asus\Desktop\myproject2\myproject\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:5-66
 	android:name
@@ -506,12 +548,6 @@ ADDED from [:expo-file-system] C:\Users\asus\Desktop\myproject2\myproject\node_m
 		ADDED from [:expo-file-system] C:\Users\asus\Desktop\myproject2\myproject\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:23:13-48
 	android:name
 		ADDED from [:expo-file-system] C:\Users\asus\Desktop\myproject2\myproject\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:13-74
-meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from [:expo-file-system] C:\Users\asus\Desktop\myproject2\myproject\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:24:13-26:70
-	android:resource
-		ADDED from [:expo-file-system] C:\Users\asus\Desktop\myproject2\myproject\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:26:17-67
-	android:name
-		ADDED from [:expo-file-system] C:\Users\asus\Desktop\myproject2\myproject\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:25:17-67
 activity#com.google.android.gms.common.api.GoogleApiActivity
 ADDED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\asus\.gradle\caches\transforms-1\files-1.1\play-services-base-17.0.0.aar\f60df8c41e9455cabb2c10f1fa302579\AndroidManifest.xml:23:9-26:75
 	android:exported

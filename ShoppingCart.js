@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, AsyncStorage } from 'react-native';
 import { Container, Content, Footer, Button, Text, Right, List, ListItem, Left, FooterTab } from 'native-base';
 import { AntDesign } from '@expo/vector-icons';
 import { connect } from 'react-redux';
@@ -10,8 +10,6 @@ class ShoppingCart extends Component {
         this.state = {
             isLogin: false
         }
-        console.log(props.cartItems.geoItems['geoData'])
-
     }
     renderSection2 = () => {
         let temp = 0
@@ -23,7 +21,7 @@ class ShoppingCart extends Component {
         )
     }
     goToOrder = () => {
-        if (this.props.cartItems.geoItems['geoData'] == "") {
+        if (this.props.cartItems.geoItems['geoData'] == undefined) {
             alert('배송지 설정 해주세요.')
             this.props.navigation.navigate('Home')
         } else if (this.state.isLogin = false) {
@@ -38,6 +36,7 @@ class ShoppingCart extends Component {
         try {
             await AsyncStorage.getItem('isLogin', (err, result) => {
                 const data = JSON.parse(result)
+                console.log(data)
                 if (data !== null) {
                     this.setState({ isLogin: data.isLogin })
                 } else {
@@ -64,10 +63,9 @@ class ShoppingCart extends Component {
             <Container>
                 <Content>
                     <List>
-                        <ListItem>
+                        <ListItem noIndent style={{ backgroundColor: "#cde1f9" }}>
                             <Left>
-                                <Image source={{ uri: this.props.route.params.uri }} style={{ width: 110, height: 110 }} />
-                                <Text style={{ fontWeight: '600', fontSize: 20, marginLeft: 20 }}>{this.props.route.params.cartTitle}</Text>
+                                <Text style={{ fontWeight: '600', fontSize: 20, marginLeft: 20 }}>장바구니</Text>
                             </Left>
                         </ListItem>
                     </List>

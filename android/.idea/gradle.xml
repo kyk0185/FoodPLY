@@ -24,11 +24,13 @@
             <option value="$PROJECT_DIR$/../node_modules/expo-permissions/android" />
             <option value="$PROJECT_DIR$/../node_modules/expo-sqlite/android" />
             <option value="$PROJECT_DIR$/../node_modules/expo-web-browser/android" />
+            <option value="$PROJECT_DIR$/../node_modules/iamport-react-native/android" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-gesture-handler/android" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-maps/lib/android" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-reanimated/android" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-safe-area-context/android" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-screens/android" />
+            <option value="$PROJECT_DIR$/../node_modules/react-native-webview/android" />
             <option value="$PROJECT_DIR$/../node_modules/unimodules-barcode-scanner-interface/android" />
             <option value="$PROJECT_DIR$/../node_modules/unimodules-camera-interface/android" />
             <option value="$PROJECT_DIR$/../node_modules/unimodules-constants-interface/android" />

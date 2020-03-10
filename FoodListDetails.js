@@ -235,7 +235,7 @@ class FoodListDetails extends Component {
         )
     }
     goCartList = () => {
-        this.props.navigation.push('ShoppingCart', { cartTitle: this.state.name, uri: this.state.image })
+        this.props.navigation.push('ShoppingCart')
     }
 
     render() {

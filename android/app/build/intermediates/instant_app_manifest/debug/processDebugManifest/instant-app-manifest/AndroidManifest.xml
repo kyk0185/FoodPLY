@@ -62,6 +62,15 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <!-- 웹뷰 및 ISP 등의 어플 인증후 앱으로 다시 호출하기 위한 스키마 설정 -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="ispmobile" />
+            </intent-filter>
         </activity>
         <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
 
@@ -77,6 +86,15 @@
             android:name="expo.modules.location.services.LocationTaskService"
             android:exported="false" />
 
+        <provider
+            android:name="com.reactnativecommunity.webview.RNCWebViewFileProvider"
+            android:authorities="com.walab.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths" />
+        </provider>
         <provider
             android:name="expo.modules.filesystem.FileSystemFileProvider"
             android:authorities="com.walab.FileSystemFileProvider"

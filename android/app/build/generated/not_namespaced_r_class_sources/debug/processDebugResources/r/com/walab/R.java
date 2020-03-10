@@ -19774,7 +19774,8 @@ public final class R {
     public static final int ViewStubCompat_android_inflatedId=2;
   }
   public static final class xml {
-    public static final int file_system_provider_paths=0x7f110000;
-    public static final int rn_dev_preferences=0x7f110001;
+    public static final int file_provider_paths=0x7f110000;
+    public static final int file_system_provider_paths=0x7f110001;
+    public static final int rn_dev_preferences=0x7f110002;
   }
 }

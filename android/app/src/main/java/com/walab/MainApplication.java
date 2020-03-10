@@ -22,7 +22,8 @@ import org.unimodules.core.interfaces.SingletonModule;
 import expo.modules.constants.ConstantsPackage;
 import expo.modules.permissions.PermissionsPackage;
 import expo.modules.filesystem.FileSystemPackage;
-
+import com.iamport.IamportPackage; // 아임포트 패키지를 불러옵니다.
+import com.reactnativecommunity.webview.RNCWebViewPackage; // 리액트 네이티브 웹뷰 패키지를 불러옵니다.
 import java.util.Arrays;
 import java.util.List;
 
@@ -42,12 +43,14 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new MapsPackage(),
-            new SafeAreaContextPackage(),
+          new MapsPackage(),
+          new SafeAreaContextPackage(),
           new ReanimatedPackage(),
           new RNGestureHandlerPackage(),
           new RNScreensPackage(),
-          new ModuleRegistryAdapter(mModuleRegistryProvider)
+          new ModuleRegistryAdapter(mModuleRegistryProvider),
+          new IamportPackage(), // 아임포트 패키지를 추가합니다.
+          new RNCWebViewPackage() // 리액트 네이티브 웹뷰 패키지를 추가합니다.
       );
     }
 
