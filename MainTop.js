@@ -1,11 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions, ScrollView, Modal, TouchableHighlight } from 'react-native';
-import { Container, Content, Footer, Button, Left, List, ListItem, Body } from 'native-base';
-import { MaterialIcons } from '@expo/vector-icons';
+import { Container, Content, Footer, Button, Left, List, ListItem, Body, Tab, Tabs } from 'native-base';
+import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
 import MapView from 'react-native-maps';
-import FoodList from './FoodList';
+import Emoji from 'react-native-emoji';
 import { TextInput } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
+import Food from './FoodList';
 const { width, height } = Dimensions.get('window');
 const GEOCODE_APPID = 'AIzaSyAopuo3k6pzMfUM6MdRuoKqCjfKPeLJ1IY';
 
@@ -62,27 +63,47 @@ class MainTop extends React.Component {
                         <TouchableOpacity onPress={() => this.props.navigation.openDrawer()}>
                             <Image style={styles.menuIcon} source={require('./assets/menu_icon.png')}></Image>
                         </TouchableOpacity>
-                        <Text style={styles.title}>FOOD♬LY</Text>
+
+                        <Text style={styles.title}>FOODP<Emoji name="taco" style={{ fontSize: 23 }} />Y</Text>
+                        <View style={{ bottom: 0, justifyContent: 'flex-end', left: 80 }}>
+                            <Button transparent onPress={() => this.props.navigation.navigate('SearchModal')}>
+                                <FontAwesome size={25} name={'search'} color='#2ECCFA' />
+                            </Button>
+                        </View>
                     </View>
                     <View style={styles.lineStyle} />
-                    <View flexDirection={'row'} style={{ padding: 5 }}>
-                        <Text style={{ marginLeft: 15 }}>전체</Text>
-                        <Text style={{ marginLeft: 15 }} >★신규맛집</Text>
-                        <Text style={{ marginLeft: 15 }} > 한식</Text>
-                        <Text style={{ marginLeft: 15 }} > 일식</Text>
-                        <Text style={{ marginLeft: 15 }} > 카페</Text>
-                        <Text style={{ marginLeft: 15 }}> 양식</Text>
-                        <Text style={{ marginLeft: 15 }}> 퓨전</Text>
-                        <Text style={{ marginLeft: 15 }}> 검색</Text>
-                    </View>
-                    <ScrollView>
-                        <FoodList />
-                    </ScrollView>
+                    <Tabs>
+                        <Tab heading="전체">
+                            <ScrollView>
+                                <Food collection="전체" />
+                            </ScrollView>
+                        </Tab>
+                        <Tab heading="한식">
+                            <ScrollView>
+                                <Food collection="한식" />
+                            </ScrollView>
+                        </Tab>
+                        <Tab heading="중식">
+                            <ScrollView>
+                                <Food collection="중식" />
+                            </ScrollView>
+                        </Tab>
+                        <Tab heading="카페">
+                            <ScrollView>
+                                <Food collection="카페" />
+                            </ScrollView>
+                        </Tab>
+                        <Tab heading="치킨">
+                            <ScrollView>
+                                <Food collection="치킨" />
+                            </ScrollView>
+                        </Tab>
+                    </Tabs>
                 </Content>
                 <Footer style={{ backgroundColor: 'white' }}>
                     <Left style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <MaterialIcons name="location-on" size={30} color="#2ECCFA" />
-                        <TouchableOpacity onPress={() => this.setModalVisible()}><Text style={{ fontWeight: 'bold' }}>배송지</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.setModalVisible()}><Text style={{ fontWeight: 'bold', color: 'black' }}>배송지</Text></TouchableOpacity>
                         <Text style={{ fontWeight: 'bold', marginLeft: 10 }}>|</Text>
                         <Text style={{ fontSize: 15, marginLeft: 10 }}>{this.props.geoData.geoItems['geoData']}</Text>
                     </Left>
@@ -188,7 +209,8 @@ const styles = StyleSheet.create({
     title: {
         padding: 25,
         fontSize: 30,
-        marginLeft: 60
+        marginLeft: 60,
+        color: 'black'
     },
     lineStyle: {
         borderWidth: 0.5,

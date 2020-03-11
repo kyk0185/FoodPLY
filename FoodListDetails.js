@@ -3,13 +3,11 @@ import { View, Image, Dimensions, StyleSheet, Modal, TouchableHighlight } from '
 import { Container, Content, Button, Text, Body, Right, Thumbnail, List, ListItem, Left, CardItem, Card } from 'native-base';
 import * as Font from 'expo-font';
 import StarRating from 'react-native-star-rating';
-import * as SQLite from 'expo-sqlite';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 import { ScrollView } from 'react-native-gesture-handler';
 import ModalFoodDetails from './ModalFoodDetails';
 import { connect } from 'react-redux';
 
-const db = SQLite.openDatabase("testds.db");
 const { width, height } = Dimensions.get('window');
 const foodData = [
     {
@@ -40,11 +38,6 @@ class FoodListDetails extends Component {
         console.log(props)
 
         this.state = {
-            image: "",
-            name: "",
-            type: "",
-            pee: 0,
-            location: "",
             rating: null,
             isReady: false,
             activeIndex: 0,
@@ -59,29 +52,6 @@ class FoodListDetails extends Component {
     }
 
     componentDidMount = async () => {
-        try {
-            await db.transaction(tx => {
-                // tx.executeSql('drop table foods', [], (tx, results) => {
-                //     console.log('drop')
-                // })
-                tx.executeSql('create table if not exists foods(id INTEGER, uri TEXT, name TEXT, type TEXT, pee TEXT, location TEXT,rating INTEGER)', [], (tx, results) => {
-                    console.log('FoodListCreate')
-                    let temp = []
-                    temp.push(this.props.route.params['id'])
-
-                    tx.executeSql('select * from foods where id = ?', temp, (_, { rows }) => {
-                        if (rows.length > 0) {
-                            console.log('success')
-                            this.setState({ image: rows.item(0).uri, name: rows.item(0).name, type: rows.item(0).type, pee: rows.item(0).pee, location: rows.item(0).location, rating: rows.item(0).rating })
-                        } else {
-                            console.log('failed')
-                        }
-                    })
-                })
-            })
-        } catch (error) {
-            console.log(error)
-        }
         await Font.loadAsync({
             Roboto: require('native-base/Fonts/Roboto.ttf'),
             Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
@@ -243,18 +213,20 @@ class FoodListDetails extends Component {
             <Container>
                 <Content>
                     <View style={{ width: width, height: height }}>
-                        <Image source={{ uri: this.state.image }} style={{ width: width, height: '40%', resizeMode: 'stretch' }} />
+
+                        <Image source={{ uri: this.props.route.params.image['uri'] }} style={{ width: width, height: '40%', resizeMode: 'stretch' }} />
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
                             <Text>      </Text>
-                            <Text style={{ fontSize: 25, marginHorizontal: 70 }}>{this.state.name}</Text>
+                            <Text style={{ fontSize: 25, marginHorizontal: 70 }}>{this.props.route.params['name']}</Text>
                             <Button transparent>
                                 <Ionicons name="ios-heart-empty" size={25} color="blue" />
                             </Button>
                         </View>
                         <View style={{ alignItems: 'center' }}>
-                            <StarRating disabled={false} maxStars={5} rating={this.state.rating} fullStarColor={'red'} starSize={15} ></StarRating>
-                            <Text style={{ marginTop: 10 }}>{this.state.pee}</Text>
+                            <StarRating disabled={false} maxStars={5} rating={4.5} fullStarColor={'red'} starSize={15} ></StarRating>
+                            <Text style={{ marginTop: 10 }}>{this.props.route.params['pee']}</Text>
                         </View>
+
                         <View style={styles.lineStyle} />
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around', borderWidth: 0.5, borderColor: 'gray' }}>
                             <Button transparent

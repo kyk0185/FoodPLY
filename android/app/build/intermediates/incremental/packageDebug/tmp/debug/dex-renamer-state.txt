@@ -1,4 +1,4 @@
-#Tue Mar 10 15:31:00 KST 2020
+#Wed Mar 11 17:25:22 KST 2020
 base.0=C\:\\Users\\asus\\Desktop\\myproject2\\myproject\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\1
 path.1=classes.dex
 renamed.1=classes2.dex

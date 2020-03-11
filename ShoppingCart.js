@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, AsyncStorage } from 'react-native';
+import { View, AsyncStorage } from 'react-native';
 import { Container, Content, Footer, Button, Text, Right, List, ListItem, Left, FooterTab } from 'native-base';
 import { AntDesign } from '@expo/vector-icons';
 import { connect } from 'react-redux';
@@ -65,7 +65,7 @@ class ShoppingCart extends Component {
                     <List>
                         <ListItem noIndent style={{ backgroundColor: "#cde1f9" }}>
                             <Left>
-                                <Text style={{ fontWeight: '600', fontSize: 20, marginLeft: 20 }}>장바구니</Text>
+                                <Text style={{ fontWeight: 'bold', fontSize: 18, marginLeft: 20 }}>장바구니</Text>
                             </Left>
                         </ListItem>
                     </List>
