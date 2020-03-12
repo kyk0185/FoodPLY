@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Image } from 'react-native';
 import { Container, Content } from "native-base";
 import { Provider } from 'react-redux';
-import store from './store'
+import { PersistGate } from 'redux-persist/integration/react'
+import configureStore from './store'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator, DrawerItemList } from '@react-navigation/drawer';
@@ -15,6 +16,7 @@ import GoToOrder from './GoToOrder';
 import Payment from './Payment';
 import SearchModal from './SearchModal';
 
+const { store, persistor } = configureStore();
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
@@ -43,16 +45,18 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <NavigationContainer>
-          <Stack.Navigator headerMode="none">
-            <Stack.Screen name="Home" component={DrawerComponent} options={{ headerShown: false }}></Stack.Screen>
-            <Stack.Screen name="FoodListDetails" component={FoodListDetails} options={{ headerShown: false }}></Stack.Screen>
-            <Stack.Screen name="ShoppingCart" component={ShoppingCart} options={{ headerShown: false }}></Stack.Screen>
-            <Stack.Screen name="GoToOrder" component={GoToOrder} options={{ headerShown: false }}></Stack.Screen>
-            <Stack.Screen name="Payment" component={Payment} options={{ headerShown: false }}></Stack.Screen>
-            <Stack.Screen name="SearchModal" component={SearchModal}></Stack.Screen>
-          </Stack.Navigator>
-        </NavigationContainer>
+        <PersistGate loading={null} persistor={persistor}>
+          <NavigationContainer>
+            <Stack.Navigator headerMode="none">
+              <Stack.Screen name="Home" component={DrawerComponent} options={{ headerShown: false }}></Stack.Screen>
+              <Stack.Screen name="FoodListDetails" component={FoodListDetails} options={{ headerShown: false }}></Stack.Screen>
+              <Stack.Screen name="ShoppingCart" component={ShoppingCart} options={{ headerShown: false }}></Stack.Screen>
+              <Stack.Screen name="GoToOrder" component={GoToOrder} options={{ headerShown: false }}></Stack.Screen>
+              <Stack.Screen name="Payment" component={Payment} options={{ headerShown: false }}></Stack.Screen>
+              <Stack.Screen name="SearchModal" component={SearchModal}></Stack.Screen>
+            </Stack.Navigator>
+          </NavigationContainer>
+        </PersistGate>
       </Provider>
     );
   }

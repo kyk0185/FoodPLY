@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { AsyncStorage } from 'react-native'
 import { Container, Content, Footer, Button, Text, Right, List, ListItem, Left, FooterTab, Body, CheckBox } from 'native-base';
 import { connect } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -11,11 +10,7 @@ class GoToOrder extends Component {
         this.state = {
             checked: false,
             checked2: false,
-            nickName: "",
-            email: "",
             amount: 0,
-            phone: "",
-
         }
     }
     _onPressButton = () => {
@@ -24,35 +19,15 @@ class GoToOrder extends Component {
     _onPressButton2 = () => {
         this.setState({ checked2: !this.state.checked2 })
     }
-    async getUserInfo() {
-        try {
-            await AsyncStorage.getItem('userInfo', (err, result) => {
-                const data = JSON.parse(result)
-                console.log(data)
-                if (data !== null) {
-                    this.setState({ nickName: data.nickName, email: data.email, phone: data.phone })
-                } else {
-                    console.log('로그인 데이터가 없습니다.')
-                }
-            })
-        } catch (error) {
-            console.log("getUserInfo error: ", error.message);
-            throw error;
-        }
-    }
-    onLoad() {
-        this.getUserInfo();
-    }
+
     componentDidMount = () => {
         this.props.navigation.addListener('focus', () => {
-            this.onLoad();
             let temp = 0
             for (let i = 0; i < this.props.cartItems.carItems.length; i++) {
                 temp += this.props.cartItems.carItems[i].cartPee
             }
             this.setState({ amount: temp })
         });
-        this.onLoad();
         let temp = 0
         for (let i = 0; i < this.props.cartItems.carItems.length; i++) {
             temp += this.props.cartItems.carItems[i].cartPee
@@ -132,7 +107,7 @@ class GoToOrder extends Component {
                         <Button active onPress={() => this.props.navigation.goBack()}>
                             <Text style={{ fontSize: 13, fontWeight: 'bold' }}>취소하기</Text>
                         </Button>
-                        <Button dark onPress={() => this.props.navigation.push('Payment', { buyer_name: this.state.nickName, buyer_email: this.state.email, amount: this.state.amount, buyer_tel: this.state.phone, buyer_addr: this.props.cartItems.geoItems['geoData'] })}>
+                        <Button dark onPress={() => this.props.navigation.push('Payment', { buyer_name: this.props.cartItems.userInfo.userData['nickName'], buyer_email: this.props.cartItems.userInfo.userData['email'], amount: this.state.amount, buyer_tel: this.props.cartItems.userInfo.userData['phone'], buyer_addr: this.props.cartItems.geoItems['geoData'] })}>
                             <Text style={{ fontSize: 13, fontWeight: 'bold', color: 'white' }}>결제하기</Text>
                         </Button>
                     </FooterTab>

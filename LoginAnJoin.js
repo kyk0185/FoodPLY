@@ -1,15 +1,16 @@
 import React from 'react';
-import { StyleSheet, View, Dimensions, AsyncStorage, Modal } from 'react-native';
+import { View, Dimensions, Modal } from 'react-native';
 import { Container, Content, Button, Text, Form, Label, Item, Input, Picker, Icon } from 'native-base';
+import { connect } from 'react-redux';
 import * as SQLite from 'expo-sqlite';
 
 const db = SQLite.openDatabase("testds.db");
 const { width, height } = Dimensions.get('window');
 
-export default class LoginAnJoin extends React.Component {
+class LoginAnJoin extends React.Component {
     constructor(props) {
         super(props);
-
+        console.log(props)
         this.state = {
             isLogin: false,
             joinForm: false,
@@ -69,7 +70,7 @@ export default class LoginAnJoin extends React.Component {
         this.setState({ birth3: text })
     }
     logout = () => {
-        AsyncStorage.removeItem('userInfo')
+        this.props.clearUserInfo()
         alert('로그아웃 되셨습니다.!')
         this.setState({ isLogin: !this.state.isLogin })
         this.props.navigation.navigate('Home')
@@ -171,33 +172,6 @@ export default class LoginAnJoin extends React.Component {
             alert('비밀번호가 일치하지 않습니다.')
         }
     }
-    async setUserINfo(data) {
-        try {
-            await AsyncStorage.setItem('userInfo', JSON.stringify(data))
-        } catch (error) {
-            console.log("setUserInfo error: ", error.message);
-            throw error;
-        }
-    }
-
-    async getUserInfo() {
-        try {
-            await AsyncStorage.getItem('userInfo', (err, result) => {
-                const data = JSON.parse(result)
-                console.log(data)
-                if (data !== null) {
-                    this.setState({ isLogin: data.isLogin, nickName: data.nickName, email: data.email })
-                }
-            })
-        } catch (error) {
-            console.log("getUserInfo error: ", error.message);
-            throw error;
-        }
-    }
-    onLoad() {
-        this.getUserInfo();
-    }
-
     loginSubmit = () => {
         if (this.state.id !== "" & this.state.password !== "") {
             try {
@@ -208,7 +182,7 @@ export default class LoginAnJoin extends React.Component {
                     tx.executeSql('SELECT * FROM users WHERE id =?', temp, (_, { rows }) => {
                         if (rows.length > 0) {
                             alert('로그인이 되셨습니다.')
-                            let temp = {
+                            let data = {
                                 nickName: rows.item(0).nickName,
                                 email: rows.item(0).email,
                                 password: rows.item(0).password,
@@ -218,7 +192,10 @@ export default class LoginAnJoin extends React.Component {
                                 birthday: rows.item(0).birthday,
                                 isLogin: true
                             };
-                            this.setUserINfo(temp);
+                            console.log(data)
+
+                            this.props.addUserInfo(data)
+                            this.setState({ isLogin: data.isLogin, nickName: data.nickName })
                             this.props.navigation.navigate('Home')
                         } else {
                             alert('아이디와 패스워드를 확인 해주세요.')
@@ -279,7 +256,15 @@ export default class LoginAnJoin extends React.Component {
         } catch (error) {
             alert(error)
         }
-        this.onLoad();
+        this.props.navigation.addListener('focus', () => {
+            if (this.props.userInfo.userInfo != '') {
+                this.setState({ isLogin: this.props.userInfo.userInfo.userData['isLogin'], nickName: this.props.userInfo.userInfo.userData['nickName'] })
+            }
+        });
+        if (this.props.userInfo.userInfo != '') {
+            this.setState({ isLogin: this.props.userInfo.userInfo.userData['isLogin'], nickName: this.props.userInfo.userInfo.userData['nickName'] })
+        }
+
     }
 
     render() {
@@ -408,9 +393,18 @@ export default class LoginAnJoin extends React.Component {
     }
 }
 
-const styles = StyleSheet.create({
-    lineStyle: {
-        borderWidth: 0.5,
-        borderColor: 'black'
-    },
-});
+const mapStateToProps = (state) => {
+    return {
+        userInfo: state
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addUserInfo: (userData) => dispatch({ type: 'ADD_USER_INFO', userData: userData }),
+        clearUserInfo: () => dispatch({ type: 'SIGNOUT_REQUEST' })
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginAnJoin)
+

@@ -64,7 +64,7 @@ class MainTop extends React.Component {
                             <Image style={styles.menuIcon} source={require('./assets/menu_icon.png')}></Image>
                         </TouchableOpacity>
 
-                        <Text style={styles.title}>FOODP<Emoji name="taco" style={{ fontSize: 23 }} />Y</Text>
+                        <Text style={styles.title}>FO<Emoji name="cookie" style={{ fontSize: 25 }} />DPLY</Text>
                         <View style={{ bottom: 0, justifyContent: 'flex-end', left: 80 }}>
                             <Button transparent onPress={() => this.props.navigation.navigate('SearchModal')}>
                                 <FontAwesome size={25} name={'search'} color='#2ECCFA' />

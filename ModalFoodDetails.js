@@ -36,7 +36,6 @@ class ModalFoodDetails extends Component {
             peeCount: prevState['peeCount'] + 1
         }))
     }
-
     render() {
         return (
             <View style={{ width: width, height: height }}>

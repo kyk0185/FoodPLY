@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import { View, AsyncStorage } from 'react-native';
+import { View } from 'react-native';
 import { Container, Content, Footer, Button, Text, Right, List, ListItem, Left, FooterTab } from 'native-base';
 import { AntDesign } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 
 class ShoppingCart extends Component {
     constructor(props) {
+        console.log(props)
         super(props)
-        this.state = {
-            isLogin: false
-        }
     }
     renderSection2 = () => {
         let temp = 0
@@ -21,10 +19,10 @@ class ShoppingCart extends Component {
         )
     }
     goToOrder = () => {
-        if (this.props.cartItems.geoItems['geoData'] == undefined) {
+        if (this.props.cartItems.geoItems == '') {
             alert('배송지 설정 해주세요.')
             this.props.navigation.navigate('Home')
-        } else if (this.state.isLogin = false) {
+        } else if (this.props.cartItems.userInfo.userData['isLogin'] = false) {
             alert('로그인 해주세요.')
             this.props.navigation.navigate('LoginAnJoin')
         } else {
@@ -32,32 +30,6 @@ class ShoppingCart extends Component {
         }
 
     }
-    async getUserInfo() {
-        try {
-            await AsyncStorage.getItem('isLogin', (err, result) => {
-                const data = JSON.parse(result)
-                console.log(data)
-                if (data !== null) {
-                    this.setState({ isLogin: data.isLogin })
-                } else {
-                    this.setState({ isLogin: false })
-                }
-            })
-        } catch (error) {
-            console.log("getUserInfo error: ", error.message);
-            throw error;
-        }
-    }
-    onLoad() {
-        this.getUserInfo();
-    }
-    componentDidMount = () => {
-        this.props.navigation.addListener('focus', () => {
-            this.onLoad();
-        });
-        this.onLoad();
-    }
-
     render() {
         return (
             <Container>
@@ -126,4 +98,4 @@ const mapDispatchProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchProps)(ShoppingCart)
+export default connect(mapStateToProps, mapDispatchProps)(ShoppingCart) 
