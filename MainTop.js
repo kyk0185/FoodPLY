@@ -63,7 +63,6 @@ class MainTop extends React.Component {
                         <TouchableOpacity onPress={() => this.props.navigation.openDrawer()}>
                             <Image style={styles.menuIcon} source={require('./assets/menu_icon.png')}></Image>
                         </TouchableOpacity>
-
                         <Text style={styles.title}>FO<Emoji name="cookie" style={{ fontSize: 25 }} />DPLY</Text>
                         <View style={{ bottom: 0, justifyContent: 'flex-end', left: 80 }}>
                             <Button transparent onPress={() => this.props.navigation.navigate('SearchModal')}>

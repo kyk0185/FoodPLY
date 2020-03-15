@@ -26,6 +26,13 @@ const userInfo = (state = [], action) => {
     }
     return state
 }
+
+const isLikedToggle = (state = [], action) => {
+    if (action.type == 'IS_LIKED_TOGGLE') {
+        return { ...state, toggleData: action.toggleData }
+    }
+    return state
+}
 const rootReducer = (state, action) => {
     if (action.type == 'SIGNOUT_REQUEST') {
         AsyncStorage.removeItem('persist:root')
@@ -38,7 +45,8 @@ const rootReducer = (state, action) => {
 const allReducers = combineReducers({
     carItems,
     geoItems,
-    userInfo
+    userInfo,
+    isLikedToggle
 })
 
 export default rootReducer

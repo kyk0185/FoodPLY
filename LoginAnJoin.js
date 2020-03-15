@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, Dimensions, Modal } from 'react-native';
-import { Container, Content, Button, Text, Form, Label, Item, Input, Picker, Icon } from 'native-base';
+import { Container, Content, Button, Text, Form, Label, Item, Input, Picker, Icon, Left, Right, Body, Title, Header } from 'native-base';
 import { connect } from 'react-redux';
 import * as SQLite from 'expo-sqlite';
+import MyPage from './MyPage';
 
 const db = SQLite.openDatabase("testds.db");
 const { width, height } = Dimensions.get('window');
@@ -72,7 +73,7 @@ class LoginAnJoin extends React.Component {
     logout = () => {
         this.props.clearUserInfo()
         alert('로그아웃 되셨습니다.!')
-        this.setState({ isLogin: !this.state.isLogin })
+        this.setState({ isLogin: !this.state.isLogin, id: "", password: "" })
         this.props.navigation.navigate('Home')
     }
 
@@ -212,7 +213,7 @@ class LoginAnJoin extends React.Component {
     }
 
     joinSubmit = () => {
-        if (this.state.email !== "" & this.state.nickName !== "" & this.state.password != "" & this.state.id != "" & this.state.gender != "" & this.state.phone != ""
+        if (this.state.email !== "" & this.state.nickName !== "" & this.state.password !== "" & this.state.id !== "" & this.state.gender !== "" & this.state.phone !== ""
             & this.state.birth1 !== "" & this.state.birth2 !== "" & this.state.birth3 !== "") {
             try {
                 let temp = [];
@@ -257,29 +258,41 @@ class LoginAnJoin extends React.Component {
             alert(error)
         }
         this.props.navigation.addListener('focus', () => {
-            if (this.props.userInfo.userInfo != '') {
+            if (this.props.userInfo.userInfo.userData != undefined) {
                 this.setState({ isLogin: this.props.userInfo.userInfo.userData['isLogin'], nickName: this.props.userInfo.userInfo.userData['nickName'] })
             }
         });
-        if (this.props.userInfo.userInfo != '') {
+        if (this.props.userInfo.userInfo.userData != undefined) {
             this.setState({ isLogin: this.props.userInfo.userInfo.userData['isLogin'], nickName: this.props.userInfo.userInfo.userData['nickName'] })
         }
-
     }
 
     render() {
         return (
             <Container style={{ position: 'absolute', width: '100%', height: '100%' }}>
+                {this.state.isLogin ?
+                    <Header androidStatusBarColor='transparent' style={{ backgroundColor: 'white', borderBottomWidth: 1, borderBottomColor: '#D8D8D8' }}>
+                        <Left style={{ flex: 2.7 }} />
+                        <Body style={{ flex: 2 }}>
+                            <Title style={{ color: '#424242', fontWeight: 'bold' }}>마이페이지</Title>
+                        </Body>
+                        <Right style={{ flex: 2 }} />
+                    </Header>
+                    :
+                    <Header androidStatusBarColor='transparent' style={{ backgroundColor: 'white', borderBottomWidth: 1, borderBottomColor: '#D8D8D8' }}>
+                        <Left style={{ flex: 3 }} />
+                        <Body style={{ flex: 2 }}>
+                            <Title style={{ color: '#424242', fontWeight: 'bold' }}>로그인</Title>
+                        </Body>
+                        <Right style={{ flex: 2 }} />
+                    </Header>
+                }
                 <Content>
-                    <View style={{ width: width, height: '15%', backgroundColor: '#81BEF7', alignItems: 'center', justifyContent: 'center' }}>
-                        <Text style={{ fontSize: 35 }}>FOOD♬LY</Text>
-                        <Text>푸드플라이로 로그인</Text>
-                    </View>
                     {this.state.isLogin ?
                         <View style={{ width: width, height: height, alignItems: 'center', backgroundColor: 'white' }}>
-                            <Text style={{ fontSize: 20, marginTop: 20, marginBottom: 20 }}>{this.state.nickName} 고객님 환영합니다.!</Text>
-                            <Button onPress={this.logout} block>
-                                <Text>로그아웃</Text>
+                            <MyPage navigation={this.props.navigation} />
+                            <Button onPress={this.logout} transparent style={{ left: 150, top: 0, borderBottomWidth: 1, borderBottomColor: 'black' }}>
+                                <Text style={{ color: 'black', fontWeight: '600' }}>로그아웃</Text>
                             </Button>
                         </View>
                         :
@@ -293,12 +306,14 @@ class LoginAnJoin extends React.Component {
                                     <Label>비밀번호</Label>
                                     <Input onChangeText={this.passwordForm} value={this.state.password} secureTextEntry={true} />
                                 </Item>
-                                <Button onPress={this.loginSubmit} block>
-                                    <Text>로그인</Text>
-                                </Button>
-                                <Button onPress={this.joinToggle} disabled={this.state.joinDisabled} block info>
-                                    <Text>회원가입</Text>
-                                </Button>
+                                <View style={{ marginTop: 20 }}>
+                                    <Button onPress={this.loginSubmit} block>
+                                        <Text>로그인</Text>
+                                    </Button>
+                                    <Button onPress={this.joinToggle} disabled={this.state.joinDisabled} block info>
+                                        <Text>회원가입</Text>
+                                    </Button>
+                                </View>
                             </Form>
                             {this.state.joinForm &&
                                 <Modal

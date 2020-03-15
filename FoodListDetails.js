@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Image, Dimensions, StyleSheet, Modal, TouchableHighlight } from 'react-native';
-import { Container, Content, Button, Text, Body, Right, Thumbnail, List, ListItem, Left, CardItem, Card } from 'native-base';
+import { Container, Content, Button, Text, Body, Right, Thumbnail, List, ListItem, Left, CardItem, Card, DeckSwiper } from 'native-base';
 import * as Font from 'expo-font';
 import StarRating from 'react-native-star-rating';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
@@ -40,6 +40,7 @@ class FoodListDetails extends Component {
         this.state = {
             rating: null,
             isReady: false,
+            isLiked: false,
             activeIndex: 0,
             modalVisible: false,
             modalId: 0,
@@ -58,6 +59,11 @@ class FoodListDetails extends Component {
             ...Ionicons.font,
         });
         this.setState({ isReady: true })
+
+        this.setState({ isLiked: this.props.cartItems.isLikedToggle.toggleData['isLiked'] })
+        this.props.navigation.addListener('focus', () => {
+            this.setState({ isLiked: this.props.cartItems.isLikedToggle.toggleData['isLiked'] })
+        });
     }
     segmentClicked = (index) => {
         this.setState({ activeIndex: index })
@@ -207,19 +213,36 @@ class FoodListDetails extends Component {
     goCartList = () => {
         this.props.navigation.push('ShoppingCart')
     }
+    handleLike = async () => {
+        await this.setState({ isLiked: !this.state.isLiked })
+        this.props.isLikedToggle({ isLiked: this.state.isLiked })
+    }
 
     render() {
         return (
             <Container>
                 <Content>
                     <View style={{ width: width, height: height }}>
-
-                        <Image source={{ uri: this.props.route.params.image['uri'] }} style={{ width: width, height: '40%', resizeMode: 'stretch' }} />
+                        <View style={{ width: width, height: '45%' }}>
+                            <DeckSwiper
+                                dataSource={foodData}
+                                renderItem={item =>
+                                    <Card >
+                                        <CardItem cardBody>
+                                            <Image source={item} style={{ height: 300, flex: 1 }} />
+                                        </CardItem>
+                                    </Card>
+                                } />
+                        </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
                             <Text>      </Text>
                             <Text style={{ fontSize: 25, marginHorizontal: 70 }}>{this.props.route.params['name']}</Text>
-                            <Button transparent>
-                                <Ionicons name="ios-heart-empty" size={25} color="blue" />
+                            <Button transparent onPress={this.handleLike}>
+                                {this.state.isLiked ?
+                                    <Ionicons name="ios-heart" size={25} color="blue" />
+                                    :
+                                    <Ionicons name="ios-heart-empty" size={25} color="blue" />
+                                }
                             </Button>
                         </View>
                         <View style={{ alignItems: 'center' }}>
@@ -257,7 +280,7 @@ class FoodListDetails extends Component {
                         </View>
                     </View>
                 </Content>
-            </Container>
+            </Container >
 
         );
     }
@@ -269,7 +292,13 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(FoodListDetails);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        isLikedToggle: (toggleData) => dispatch({ type: 'IS_LIKED_TOGGLE', toggleData: toggleData })
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FoodListDetails);
 const styles = StyleSheet.create({
     lineStyle: {
         borderWidth: 0.5,

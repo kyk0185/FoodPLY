@@ -1,7 +1,7 @@
 const data = [
     {
         key: 1,
-        uri: 'https://pds.joins.com/news/component/htmlphoto_mmdata/201903/08/52cf07ea-c8da-4574-b0e9-21e0e3b31118.jpg',
+        uri: 'https://www.sisaweek.com/news/photo/201512/58799_39887_2259.jpg',
         name: 'BBQ',
         type: '배달팁: 무료(16,000원 이상)',
         pee: '최소 주문금액: 8,000원',

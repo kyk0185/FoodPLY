@@ -15,6 +15,7 @@ import ShoppingCart from './ShoppingCart';
 import GoToOrder from './GoToOrder';
 import Payment from './Payment';
 import SearchModal from './SearchModal';
+import Certification from './Certification';
 
 const { store, persistor } = configureStore();
 const Drawer = createDrawerNavigator();
@@ -24,7 +25,7 @@ function Menu(props) {
   return (
     <Container>
       <Content>
-        <Image source={require('./assets/food4.jpg')} style={{ width: 280, height: 140, justifyContent: 'center', alignItems: 'center', resizeMode: 'stretch' }} />
+        <Image source={require('./assets/food8.webp')} style={{ width: 280, height: 150, justifyContent: 'center', alignItems: 'center', resizeMode: 'cover' }} />
         <DrawerItemList {...props} />
       </Content>
     </Container>
@@ -54,6 +55,7 @@ export default class App extends Component {
               <Stack.Screen name="GoToOrder" component={GoToOrder} options={{ headerShown: false }}></Stack.Screen>
               <Stack.Screen name="Payment" component={Payment} options={{ headerShown: false }}></Stack.Screen>
               <Stack.Screen name="SearchModal" component={SearchModal}></Stack.Screen>
+              <Stack.Screen name="Certification" component={Certification} options={{ headerShown: false }}></Stack.Screen>
             </Stack.Navigator>
           </NavigationContainer>
         </PersistGate>

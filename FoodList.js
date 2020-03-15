@@ -9,7 +9,7 @@ function FoodList(props) {
     return (
         <SafeAreaView style={{ padding: 10 }}>
             <View>
-                <TouchableOpacity onPress={() => navigation.navigate('FoodListDetails', { image: props.imag, name: props.name, pee: props.pee })}>
+                <TouchableOpacity onPress={() => navigation.navigate('FoodListDetails', { name: props.name, pee: props.pee })}>
                     <Image source={props.imag} style={{ width: 170, height: 170 }} />
                     <Text style={{ fontSize: 20, color: 'black', marginBottom: 10 }}>{props.name}</Text>
                     <Text>{props.type}</Text>
