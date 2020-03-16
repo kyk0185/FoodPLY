@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { Container, Content, Footer, Button, Text, Right, List, ListItem, Left, FooterTab } from 'native-base';
+import { Container, Content, Footer, Button, Text, Right, List, ListItem, Left, FooterTab, Header, Body, Title, Icon } from 'native-base';
 import { AntDesign } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 
@@ -9,60 +9,72 @@ class ShoppingCart extends Component {
         console.log(props)
         super(props)
     }
-    renderSection2 = () => {
-        let temp = 0
-        for (let i = 0; i < this.props.cartItems.carItems.length; i++) {
-            temp += this.props.cartItems.carItems[i].cartPee
-        }
-        return (
-            <Text style={{ fontWeight: 'bold', color: 'white', marginRight: 20 }}>{temp}원</Text>
-        )
-    }
     goToOrder = () => {
         if (this.props.cartItems.geoItems == '') {
             alert('배송지 설정 해주세요.')
             this.props.navigation.navigate('Home')
-        } else if (this.props.cartItems.userInfo.userData['isLogin'] = false) {
+        } else if (this.props.cartItems.userInfo.userData == undefined) {
             alert('로그인 해주세요.')
-            this.props.navigation.navigate('LoginAnJoin')
+            this.props.navigation.navigate('Details')
         } else {
             this.props.navigation.navigate('GoToOrder')
         }
 
     }
+    renderSection2 = () => {
+        let temp = 0
+        for (let i = 0; i < this.props.cartItems.carItems.length; i++) {
+            if (!this.props.cartItems.carItems[i].isPay) {
+                temp += this.props.cartItems.carItems[i].cartPee
+            }
+        }
+        return (
+            <Text style={{ fontWeight: 'bold', color: 'white', marginRight: 20 }}>{temp} 원</Text>
+        )
+    }
     render() {
         return (
             <Container>
+                <Header androidStatusBarColor='transparent' style={{ backgroundColor: 'white', borderBottomWidth: 1, borderBottomColor: '#D8D8D8' }}>
+                    <Left style={{ flex: 2.7 }} />
+                    <Body style={{ flex: 2 }}>
+                        <Title style={{ color: '#424242', fontWeight: 'bold' }}>장바구니</Title>
+                    </Body>
+                    <Right style={{ flex: 2 }} />
+                </Header>
+
                 <Content>
-                    <List>
-                        <ListItem noIndent style={{ backgroundColor: "#cde1f9" }}>
-                            <Left>
-                                <Text style={{ fontWeight: 'bold', fontSize: 18, marginLeft: 20 }}>장바구니</Text>
-                            </Left>
-                        </ListItem>
-                    </List>
                     {this.props.cartItems.carItems.map((dish, index) => {
-                        return (
-                            <List>
-                                <ListItem itemDivider>
-                                    <Left>
-                                        <Text style={{ fontWeight: 'bold' }}>{dish.cartName}</Text>
-                                    </Left>
-                                    <View style={{ flexDirection: 'row' }}>
-                                        <Text>{dish.cartPeeCount}</Text>
-                                        <Button transparent onPress={() => this.props.removeItem(dish.cartId)} style={{ marginLeft: 20 }}>
-                                            <AntDesign name="closesquareo" size={20} color="gray" />
-                                        </Button>
-                                    </View>
-                                </ListItem>
-                                <ListItem>
-                                    <Left>
-                                        <Text>가격</Text>
-                                    </Left>
-                                    <Right><Text>{dish.cartPee}원</Text></Right>
-                                </ListItem>
-                            </List>
-                        )
+                        if (!dish.isPay) {
+                            return (
+                                <List>
+                                    <ListItem itemDivider style={{ backgroundColor: '#E6E6E6', borderBottomColor: 'black', borderBottomWidth: 0.7 }}>
+                                        <Left>
+                                            <Text style={{ fontWeight: 'bold' }}>{dish.cartName}</Text>
+                                        </Left>
+                                        <View style={{ flexDirection: 'row' }}>
+                                            <Text>{dish.cartPeeCount}</Text>
+                                            <Button transparent onPress={() => this.props.removeItem(dish.cartId)} style={{ marginLeft: 20 }}>
+                                                <AntDesign name="closesquareo" size={20} color="gray" />
+                                            </Button>
+                                        </View>
+                                    </ListItem>
+                                    <ListItem>
+                                        <Left>
+                                            <Text>가격</Text>
+                                        </Left>
+                                        <Right><Text>{dish.cartPee}원</Text></Right>
+                                    </ListItem>
+                                </List>
+                            )
+                        }
+
+                        // return (
+                        //     <View style={{ marginTop: 100, justifyContent: 'center', alignItems: 'center' }}>
+                        //         <Icon style={{ fontSize: 100, marginBottom: 20, color: 'red' }} type="AntDesign" name={'exclamationcircle'} />
+                        //         <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 20, marginTop: 30 }}>장바구니가 비어있습니다.</Text>
+                        //     </View>
+                        // )
                     })}
                 </Content>
                 <Footer style={{ backgroundColor: "#424242" }}>

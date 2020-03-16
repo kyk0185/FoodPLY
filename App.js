@@ -14,6 +14,7 @@ import FoodListDetails from './FoodListDetails';
 import ShoppingCart from './ShoppingCart';
 import GoToOrder from './GoToOrder';
 import Payment from './Payment';
+import PaymentResults from './PaymentResults';
 import SearchModal from './SearchModal';
 import Certification from './Certification';
 
@@ -54,6 +55,7 @@ export default class App extends Component {
               <Stack.Screen name="ShoppingCart" component={ShoppingCart} options={{ headerShown: false }}></Stack.Screen>
               <Stack.Screen name="GoToOrder" component={GoToOrder} options={{ headerShown: false }}></Stack.Screen>
               <Stack.Screen name="Payment" component={Payment} options={{ headerShown: false }}></Stack.Screen>
+              <Stack.Screen name="PaymentResults" component={PaymentResults} options={{ headerShown: false }}></Stack.Screen>
               <Stack.Screen name="SearchModal" component={SearchModal}></Stack.Screen>
               <Stack.Screen name="Certification" component={Certification} options={{ headerShown: false }}></Stack.Screen>
             </Stack.Navigator>

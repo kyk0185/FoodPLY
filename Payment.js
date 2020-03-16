@@ -8,6 +8,7 @@ export default function Payment(props) {
     console.log(props)
 
     function callback(response) {
+        props.navigation.navigate('PaymentResults', response)
         console.log('callback', response)
     }
 

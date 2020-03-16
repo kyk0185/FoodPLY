@@ -5,7 +5,6 @@ import { Entypo } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import * as SQLite from 'expo-sqlite';
 
-
 const db = SQLite.openDatabase("testds.db");
 const { width } = Dimensions.get('window');
 
@@ -85,7 +84,7 @@ class MyPage extends Component {
                     <Item stackedLabel style={{ width: width }}>
                         <Label>이름</Label>
                         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                            <Input onChangeText={this.nickNameForm} onSubmitEditing={this.checkNickName} value={this.state.nickName} />
+                            <Input onChangeText={this.nickNameForm} value={this.state.nickName} />
                             <Entypo name="edit" size={20} color="#BDBDBD" />
                             <Text>   </Text>
                         </View>
@@ -93,7 +92,7 @@ class MyPage extends Component {
                     <Item stackedLabel >
                         <Label>연락처</Label>
                         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                            <Input onChangeText={this.phoneForm} onSubmitEditing={this.checkPhone} value={this.state.phone} />
+                            <Input onChangeText={this.phoneForm} value={this.state.phone} />
                             <Entypo name="edit" size={20} color="#BDBDBD" />
                             <Button info style={{ marginLeft: 10 }} onPress={() => this.props.navigation.push('Certification', { name: this.state.nickName, phone: this.state.phone })}><Text>인증하기</Text></Button>
                         </View>
@@ -101,7 +100,7 @@ class MyPage extends Component {
                     <Item stackedLabel >
                         <Label>이메일</Label>
                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                            <Input onChangeText={this.emailForm} onSubmitEditing={this.checkEmail} value={this.state.email} />
+                            <Input onChangeText={this.emailForm} value={this.state.email} />
                             <Entypo name="edit" size={20} color="#BDBDBD" />
                             <Text>   </Text>
                         </View>

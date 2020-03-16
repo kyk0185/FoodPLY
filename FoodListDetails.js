@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { View, Image, Dimensions, StyleSheet, Modal, TouchableHighlight } from 'react-native';
-import { Container, Content, Button, Text, Body, Right, Thumbnail, List, ListItem, Left, CardItem, Card, DeckSwiper } from 'native-base';
+import { Container, Content, Button, Text, Body, Right, Thumbnail, List, ListItem, Left, CardItem, Card, DeckSwiper, Footer, FooterTab, Icon } from 'native-base';
 import * as Font from 'expo-font';
 import StarRating from 'react-native-star-rating';
-import { Ionicons, AntDesign } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { ScrollView } from 'react-native-gesture-handler';
 import ModalFoodDetails from './ModalFoodDetails';
 import { connect } from 'react-redux';
@@ -204,10 +204,12 @@ class FoodListDetails extends Component {
         let temp = 0
 
         for (let i = 0; i < this.props.cartItems.carItems.length; i++) {
-            temp += this.props.cartItems.carItems[i].cartPee
+            if (!this.props.cartItems.carItems[i].isPay) {
+                temp += this.props.cartItems.carItems[i].cartPee
+            }
         }
         return (
-            <Text style={{ fontWeight: 'bold', fontSize: 17 }}>{temp}원</Text>
+            <Text style={{ fontWeight: 'bold', fontSize: 15 }}>{temp} 원</Text>
         )
     }
     goCartList = () => {
@@ -269,17 +271,21 @@ class FoodListDetails extends Component {
                             </Button>
                         </View>
                         {this.renderSection()}
-                        <View style={{ flexDirection: 'row' }}>
-                            <Button block iconLeft style={{ flex: 1 }} onPress={() => this.goCartList()}>
-                                <AntDesign name="shoppingcart" size={25} color="white" />
-                                {this.renderSection2()}
-                            </Button>
-                            <Button block info style={{ flex: 1 }}>
-                                <Text style={{ fontWeight: 'bold' }}>주문하기</Text>
-                            </Button>
-                        </View>
+
                     </View>
                 </Content>
+                <Footer >
+                    <FooterTab>
+                        <Button onPress={() => this.goCartList()} vertical>
+                            <Icon style={{ fontSize: 25, color: 'white' }} type="AntDesign" name='shoppingcart' />
+                            {this.renderSection2()}
+                        </Button>
+
+                        <Button info onPress={() => this.props.navigation.navigate('GoToOrder')} >
+                            <Text style={{ fontWeight: 'bold', fontSize: 16 }}>주문하기</Text>
+                        </Button>
+                    </FooterTab>
+                </Footer>
             </Container >
 
         );

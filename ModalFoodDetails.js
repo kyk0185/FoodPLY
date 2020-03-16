@@ -69,7 +69,7 @@ class ModalFoodDetails extends Component {
                         <Text style={{ marginRight: 20, color: 'white' }}>{this.state.pee}원</Text>
                     </View>
                     <View style={{ width: width, height: '10%' }}>
-                        <Button block iconLeft onPress={() => this.props.addItemToCart(this.state.pee, this.state.peeCount, this.props.name, this.props.id)}>
+                        <Button block iconLeft onPress={() => this.props.addItemToCart(this.state.pee, this.state.peeCount, this.props.name, this.props.id, false)}>
                             <AntDesign name="shoppingcart" size={25} color="white" />
                             <Text>장바구니담기</Text>
                         </Button>
@@ -82,8 +82,8 @@ class ModalFoodDetails extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addItemToCart: (cartPee, cartPeeCount, cartName, cartId) =>
-            dispatch({ type: 'ADD_TO_CART', cartPee: cartPee, cartPeeCount: cartPeeCount, cartName: cartName, cartId: cartId })
+        addItemToCart: (cartPee, cartPeeCount, cartName, cartId, isPay) =>
+            dispatch({ type: 'ADD_TO_CART', cartPee: cartPee, cartPeeCount: cartPeeCount, cartName: cartName, cartId: cartId, isPay: isPay })
     }
 }
 

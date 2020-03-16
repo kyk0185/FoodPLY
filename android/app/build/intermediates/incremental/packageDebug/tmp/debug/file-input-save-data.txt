@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sun Mar 15 13:47:08 KST 2020
+#Mon Mar 16 15:39:38 KST 2020
 56.path=lib/arm64-v8a/libreactnativeblob.so
 5.base=C\:\\Users\\asus\\Desktop\\myproject2\\myproject\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 42.base=C\:\\Users\\asus\\Desktop\\myproject2\\myproject\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
