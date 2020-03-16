@@ -11,11 +11,16 @@ const carItems = (state = [], action) => {
 
         case 'MODIFY_FROM_CART':
             return state.map((dish, index) => {
-                if (index === action.cartId) {
-                    return Object.assign({}, dish, {
-                        isPay: !dish.isPay
-                    })
+                console.log('index', dish.cartId)
+                console.log('action', action.cartId)
+                if (dish.isPay === false) {
+                    if (dish.cartId === action.cartId) {
+                        return Object.assign({}, dish, {
+                            isPay: !dish.isPay
+                        })
+                    }
                 }
+                console.log(dish)
                 return dish
             })
     }

@@ -7,6 +7,7 @@ class PaymentResults extends Component {
     constructor(props) {
         super(props)
 
+
     }
     componentDidMount = () => {
         const response = this.props.route.params
@@ -16,8 +17,10 @@ class PaymentResults extends Component {
 
         for (let i = 0; i < this.props.cartItems.carItems.length; i++) {
             if (isSuccess) {
-                console.log(this.props.cartItems.carItems[i].cartId)
-                this.props.modiItem(this.props.cartItems.carItems[i].cartId)
+                if (!this.props.cartItems.carItems[i].isPay) {
+                    console.log('Payment', this.props.cartItems.carItems[i].isPay)
+                    this.props.modiItem(this.props.cartItems.carItems[i].cartId)
+                }
             }
         }
 
@@ -54,7 +57,7 @@ class PaymentResults extends Component {
                     bordered
                     transparent
                     style={{ marginLeft: 'auto', marginRight: 'auto' }}
-                    onPress={() => props.navigation.popToTop()}>
+                    onPress={() => this.props.navigation.popToTop()}>
                     <Icon name='arrow-back' style={{ color: 'black' }} />
                     <Text style={{ color: 'black' }}>돌아가기</Text>
                 </Button>
