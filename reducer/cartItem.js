@@ -11,8 +11,6 @@ const carItems = (state = [], action) => {
 
         case 'MODIFY_FROM_CART':
             return state.map((dish, index) => {
-                console.log('index', dish.cartId)
-                console.log('action', action.cartId)
                 if (dish.isPay === false) {
                     if (dish.cartId === action.cartId) {
                         return Object.assign({}, dish, {
@@ -20,7 +18,6 @@ const carItems = (state = [], action) => {
                         })
                     }
                 }
-                console.log(dish)
                 return dish
             })
     }
@@ -36,8 +33,12 @@ const geoItems = (state = [], action) => {
 }
 
 const userInfo = (state = [], action) => {
-    if (action.type == 'ADD_USER_INFO') {
-        return { ...state, userData: action.userData }
+    switch (action.type) {
+        case 'ADD_USER_INFO':
+            return { ...state, userData: action.userData }
+        case 'MODI_USER_INFO':
+            console.log('reducer', state)
+            return { ...state, userData: { ...state.userData, nickName: action.userData['nickName'], phone: action.userData['phone'], email: action.userData['email'] } }
     }
     return state
 }

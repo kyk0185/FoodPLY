@@ -49,16 +49,16 @@ class MyPage extends Component {
                         let data = {
                             nickName: this.state.nickName,
                             email: this.state.email,
-                            password: this.props.userInfo.userInfo.userData['password'],
-                            id: this.props.userInfo.userInfo.userData['id'],
-                            gender: this.props.userInfo.userInfo.userData['gender'],
+                            // password: this.props.userInfo.userInfo.userData['password'],
+                            // id: this.props.userInfo.userInfo.userData['id'],
+                            // gender: this.props.userInfo.userInfo.userData['gender'],
                             phone: this.state.phone,
-                            birthday: this.props.userInfo.userInfo.userData['birthday'],
-                            isLogin: true
+                            // birthday: this.props.userInfo.userInfo.userData['birthday'],
+                            // isLogin: true
                         };
                         console.log(data)
 
-                        this.props.addUserInfo(data)
+                        this.props.modiUserInfo(data)
                     }
                 })
             })
@@ -163,7 +163,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        addUserInfo: (userData) => dispatch({ type: 'ADD_USER_INFO', userData: userData })
+        modiUserInfo: (userData) => dispatch({ type: 'MODI_USER_INFO', userData: userData })
     }
 }
 

@@ -18,7 +18,6 @@ class PaymentResults extends Component {
         for (let i = 0; i < this.props.cartItems.carItems.length; i++) {
             if (isSuccess) {
                 if (!this.props.cartItems.carItems[i].isPay) {
-                    console.log('Payment', this.props.cartItems.carItems[i].isPay)
                     this.props.modiItem(this.props.cartItems.carItems[i].cartId)
                 }
             }

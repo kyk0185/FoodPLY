@@ -10,12 +10,21 @@ class ShoppingCart extends Component {
         super(props)
     }
     goToOrder = () => {
+        let temp = 0
+        for (let i = 0; i < this.props.cartItems.carItems.length; i++) {
+            if (!this.props.cartItems.carItems[i].isPay) {
+                temp += this.props.cartItems.carItems[i].cartPee
+            }
+        }
         if (this.props.cartItems.geoItems == '') {
             alert('배송지 설정 해주세요.')
             this.props.navigation.navigate('Home')
         } else if (this.props.cartItems.userInfo.userData == undefined) {
             alert('로그인 해주세요.')
             this.props.navigation.navigate('Details')
+        } else if (temp === 0) {
+            alert('장바구니에 먼저 담아주세요.')
+            this.props.navigation.goBack()
         } else {
             this.props.navigation.navigate('GoToOrder')
         }
@@ -31,6 +40,22 @@ class ShoppingCart extends Component {
         return (
             <Text style={{ fontWeight: 'bold', color: 'white', marginRight: 20 }}>{temp} 원</Text>
         )
+    }
+    renderSection3 = () => {
+        let temp = 0
+        for (let i = 0; i < this.props.cartItems.carItems.length; i++) {
+            if (!this.props.cartItems.carItems[i].isPay) {
+                temp += this.props.cartItems.carItems[i].cartPee
+            }
+        }
+        if (temp === 0) {
+            return (
+                <View style={{ marginTop: 100, justifyContent: 'center', alignItems: 'center' }}>
+                    <Icon style={{ fontSize: 100, marginBottom: 20, color: 'red' }} type="AntDesign" name={'exclamationcircle'} />
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 20, marginTop: 30 }}>장바구니가 비어있습니다.</Text>
+                </View>
+            )
+        }
     }
     render() {
         return (
@@ -68,14 +93,8 @@ class ShoppingCart extends Component {
                                 </List>
                             )
                         }
-
-                        // return (
-                        //     <View style={{ marginTop: 100, justifyContent: 'center', alignItems: 'center' }}>
-                        //         <Icon style={{ fontSize: 100, marginBottom: 20, color: 'red' }} type="AntDesign" name={'exclamationcircle'} />
-                        //         <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 20, marginTop: 30 }}>장바구니가 비어있습니다.</Text>
-                        //     </View>
-                        // )
                     })}
+                    {this.renderSection3()}
                 </Content>
                 <Footer style={{ backgroundColor: "#424242" }}>
                     <Left>

@@ -49,7 +49,7 @@ export default class App extends Component {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <NavigationContainer>
-            <Stack.Navigator headerMode="none">
+            <Stack.Navigator headerMode="none" initialRouteName="Home"> 
               <Stack.Screen name="Home" component={DrawerComponent} options={{ headerShown: false }}></Stack.Screen>
               <Stack.Screen name="FoodListDetails" component={FoodListDetails} options={{ headerShown: false }}></Stack.Screen>
               <Stack.Screen name="ShoppingCart" component={ShoppingCart} options={{ headerShown: false }}></Stack.Screen>

@@ -123,7 +123,7 @@ class FoodListDetails extends Component {
                 <ScrollView>
                     <Card>
                         <CardItem header bordered>
-                            <Text>BBQS</Text>
+                            <Text>BBQ</Text>
                         </CardItem>
                         <CardItem>
                             <Body>
@@ -209,8 +209,30 @@ class FoodListDetails extends Component {
             }
         }
         return (
-            <Text style={{ fontWeight: 'bold', fontSize: 15 }}>{temp} 원</Text>
+            <Text style={{ fontWeight: 'bold', fontSize: 13 }}>{temp} 원</Text>
         )
+    }
+    renderSection3 = () => {
+        let temp = 0
+
+        for (let i = 0; i < this.props.cartItems.carItems.length; i++) {
+            if (!this.props.cartItems.carItems[i].isPay) {
+                temp += this.props.cartItems.carItems[i].cartPee
+            }
+        }
+        if (temp === 0) {
+            return (
+                <Button dark onPress={() => this.props.navigation.navigate('GoToOrder')} disabled>
+                    <Text style={{ fontSize: 13, fontWeight: 'bold', color: 'white' }}>주문하기</Text>
+                </Button>
+            )
+        } else {
+            return (
+                <Button dark onPress={() => this.props.navigation.navigate('GoToOrder')} >
+                    <Text style={{ fontSize: 13, fontWeight: 'bold', color: 'white' }}>주문하기</Text>
+                </Button>
+            )
+        }
     }
     goCartList = () => {
         this.props.navigation.push('ShoppingCart')
@@ -274,16 +296,14 @@ class FoodListDetails extends Component {
 
                     </View>
                 </Content>
-                <Footer >
+                <Footer>
                     <FooterTab>
-                        <Button onPress={() => this.goCartList()} vertical>
+                        <Button onPress={() => this.goCartList()} vertical active>
                             <Icon style={{ fontSize: 25, color: 'white' }} type="AntDesign" name='shoppingcart' />
                             {this.renderSection2()}
                         </Button>
 
-                        <Button info onPress={() => this.props.navigation.navigate('GoToOrder')} >
-                            <Text style={{ fontWeight: 'bold', fontSize: 16 }}>주문하기</Text>
-                        </Button>
+                        {this.renderSection3()}
                     </FooterTab>
                 </Footer>
             </Container >
