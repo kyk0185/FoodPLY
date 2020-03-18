@@ -35,10 +35,6 @@ class PaymentResults extends Component {
                 <Icon style={{ fontSize: 100, textAlign: 'center', marginBottom: 20, color: '#52c41a' }} type="AntDesign" name={isSuccess ? 'checkcircle' : 'exclamationcircle'} />
                 <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 20, marginLeft: 18, marginTop: 20 }}>{`결제에 ${isSuccess ? '성공' : '실패'}하였습니다.`}</Text>
                 <List style={{ width: '90%', marginBottom: 50 }}>
-                    <ListItem style={{ borderBottomWidth: 0, marginTop: -10, marginBottom: -10 }}>
-                        <Text style={{ width: '40%', color: 'rgba(0, 0, 0, 0.6)' }}>아임포트 번호</Text>
-                        <Text style={{ width: '60%' }}>{imp_uid}</Text>
-                    </ListItem>
                     {isSuccess ? (
                         <ListItem style={{ borderBottomWidth: 0, marginTop: -10, marginBottom: -10 }}>
                             <Text style={{ width: '40%', color: 'rgba(0, 0, 0, 0.6)' }}>주문 번호</Text>

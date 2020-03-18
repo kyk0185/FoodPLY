@@ -48,7 +48,9 @@ class FoodListDetails extends Component {
             modalUri: "",
             modalRef: "",
             modalPee: 0,
-            cartPee: 0
+            cartPee: 0,
+            modalBrand: "",
+            modalCollection: ""
         }
     }
 
@@ -70,7 +72,7 @@ class FoodListDetails extends Component {
     }
 
     setModalVisible(visible) {
-        this.setState({ modalVisible: !this.state.modalVisible, modalId: visible.id, modalName: visible.name, modalRef: visible.ref, modalPee: visible.pee, modalUri: visible.uri['uri'] })
+        this.setState({ modalVisible: !this.state.modalVisible, modalId: visible.id, modalName: visible.name, modalRef: visible.ref, modalPee: visible.pee, modalUri: visible.uri['uri'], modalBrand: visible.brand, modalCollection: visible.collection })
     }
     renderSection = () => {
         if (this.state.activeIndex == 0) {
@@ -81,7 +83,7 @@ class FoodListDetails extends Component {
                             return (
                                 <ListItem thumbnail>
                                     <Body>
-                                        <TouchableHighlight onPress={() => this.setModalVisible({ id: index, name: dish.name, ref: dish.ref, pee: dish.pee, uri: dish })}>
+                                        <TouchableHighlight onPress={() => this.setModalVisible({ id: index, name: dish.name, ref: dish.ref, pee: dish.pee, uri: dish, brand: this.props.route.params['name'], collection: this.props.route.params['collection'] })}>
                                             <Text>{dish.name}</Text>
                                         </TouchableHighlight>
                                         <Text style={{ marginTop: 10 }}>{dish.ref}</Text>
@@ -109,7 +111,7 @@ class FoodListDetails extends Component {
                                             </TouchableHighlight>
                                         </View>
                                         <View style={{ width: width, height: height }}>
-                                            <ModalFoodDetails id={this.state.modalId} name={this.state.modalName} remarks={this.state.modalRef} pee={this.state.modalPee} uri={this.state.modalUri} />
+                                            <ModalFoodDetails id={this.state.modalId} name={this.state.modalName} remarks={this.state.modalRef} pee={this.state.modalPee} uri={this.state.modalUri} brand={this.state.modalBrand} collection={this.state.modalCollection} />
                                         </View>
                                     </Modal>
                                 </View>

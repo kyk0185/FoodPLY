@@ -24,6 +24,7 @@ class SearchModal extends Component {
                     style={styles.searchInput}
                     placeholder='상호명,레스토랑명 검색'
                 />
+
                 <ScrollView>
                     {filteredResults.map(results => {
                         return (

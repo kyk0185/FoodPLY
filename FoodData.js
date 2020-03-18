@@ -6,7 +6,7 @@ const data = [
         type: '배달팁: 무료(16,000원 이상)',
         pee: '최소 주문금액: 8,000원',
         location: '0.1km',
-        collection: '치킨'
+        collection: 'chicken'
     },
     {
         key: 2,
@@ -15,7 +15,7 @@ const data = [
         type: '배달팁: 무료(16,000원 이상)',
         pee: '최소 주문금액: 8,000원',
         location: '0.5km',
-        collection: '치킨'
+        collection: 'chicken'
     },
     {
         key: 3,
@@ -24,7 +24,7 @@ const data = [
         type: '배달팁: 무료',
         pee: '최소 주문금액: 1,500원',
         location: '1.1km',
-        collection: '중식'
+        collection: 'ramen'
     },
     {
         key: 4,
@@ -33,7 +33,7 @@ const data = [
         type: '배달팁: 무료(16,000원 이상)',
         pee: '최소 주문금액: 8,000원',
         location: '0.1km',
-        collection: '한식'
+        collection: 'rice'
     },
     {
         key: 5,
@@ -42,7 +42,7 @@ const data = [
         type: '배달팁: 무료(10,000원 이상)',
         pee: '최소 주문금액: 1,0000원',
         location: '5km',
-        collection: '카페'
+        collection: 'coffee'
     },
     {
         key: 6,
@@ -51,7 +51,7 @@ const data = [
         type: '배달팁: 무료(20,000원 이상)',
         pee: '최소 주문금액: 11,000원',
         location: '2.1km',
-        collection: '한식'
+        collection: 'rice'
     },
     {
         key: 7,
@@ -60,7 +60,7 @@ const data = [
         type: '배달팁: 무료(11,000원 이상)',
         pee: '최소 주문금액: 10,000원',
         location: '3.1km',
-        collection: '한식'
+        collection: 'rice'
     },
     {
         key: 8,
@@ -69,7 +69,7 @@ const data = [
         type: '배달팁: 무료(11,000원 이상)',
         pee: '최소 주문금액: 9,000원',
         location: '10.1km',
-        collection: '중식'
+        collection: 'ramen'
     },
     {
         key: 9,
@@ -78,7 +78,7 @@ const data = [
         type: '배달팁: 무료(13,000원 이상)',
         pee: '최소 주문금액: 9,000원',
         location: '2.1km',
-        collection: '카페'
+        collection: 'coffee'
     },
     {
         key: 10,
@@ -87,7 +87,7 @@ const data = [
         type: '배달팁: 무료(20,000원 이상)',
         pee: '최소 주문금액: 15,000원',
         location: '5.1km',
-        collection: '한식'
+        collection: 'rice'
     },
     {
         key: 11,
@@ -96,7 +96,7 @@ const data = [
         type: '배달팁: 없음',
         pee: '최소 주문금액: 18,000원',
         location: '10km',
-        collection: '중식'
+        collection: 'ramen'
     },
     {
         key: 12,
@@ -105,7 +105,7 @@ const data = [
         type: '배달팁: 무료(20,000원 이상)',
         pee: '최소 주문금액: 19,000원',
         location: '5km',
-        collection: '중식'
+        collection: 'ramen'
     },
     {
         key: 13,
@@ -114,7 +114,7 @@ const data = [
         type: '배달팁: 무료(25,000원 이상)',
         pee: '최소 주문금액: 10,000원',
         location: '1.2km',
-        collection: '카페'
+        collection: 'coffee'
     },
     {
         key: 14,
@@ -123,7 +123,7 @@ const data = [
         type: '배달팁: 무료(20,000원 이상)',
         pee: '최소 주문금액: 12,000원',
         location: '6km',
-        collection: '카페'
+        collection: 'coffee'
     },
     {
         key: 15,
@@ -132,7 +132,7 @@ const data = [
         type: '배달팁: 무료(20,000원 이상)',
         pee: '최소 주문금액: 13,000원',
         location: '3km',
-        collection: '치킨'
+        collection: 'chicken'
     },
     {
         key: 16,
@@ -141,7 +141,7 @@ const data = [
         type: '배달팁: 무료(20,000원 이상)',
         pee: '최소 주문금액: 15,000원',
         location: '2km',
-        collection: '치킨'
+        collection: 'chicken'
     }
 
 ]

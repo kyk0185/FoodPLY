@@ -79,22 +79,22 @@ class MainTop extends React.Component {
                         </Tab>
                         <Tab heading="한식">
                             <ScrollView>
-                                <Food collection="한식" />
+                                <Food collection="rice" />
                             </ScrollView>
                         </Tab>
                         <Tab heading="중식">
                             <ScrollView>
-                                <Food collection="중식" />
+                                <Food collection="ramen" />
                             </ScrollView>
                         </Tab>
                         <Tab heading="카페">
                             <ScrollView>
-                                <Food collection="카페" />
+                                <Food collection="coffee" />
                             </ScrollView>
                         </Tab>
                         <Tab heading="치킨">
                             <ScrollView>
-                                <Food collection="치킨" />
+                                <Food collection="chicken" />
                             </ScrollView>
                         </Tab>
                     </Tabs>

@@ -66,10 +66,10 @@ class ModalFoodDetails extends Component {
                     </View>
                     <View style={{ width: width, height: '7%', backgroundColor: 'gray', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                         <Text style={{ marginLeft: 20, color: 'white' }}>메뉴금액</Text>
-                        <Text style={{ marginRight: 20, color: 'white' }}>{this.state.pee}원</Text>
+                        <Text style={{ marginRight: 20, color: 'white' }}>{this.props.pee}원</Text>
                     </View>
                     <View style={{ width: width, height: '10%' }}>
-                        <Button block iconLeft onPress={() => this.props.addItemToCart(this.state.pee, this.state.peeCount, this.props.name, this.props.id, false)}>
+                        <Button block iconLeft onPress={() => this.props.addItemToCart(this.state.pee, this.state.peeCount, this.props.name, this.props.id, false, this.props.brand, this.props.collection)}>
                             <AntDesign name="shoppingcart" size={25} color="white" />
                             <Text>장바구니담기</Text>
                         </Button>
@@ -82,8 +82,8 @@ class ModalFoodDetails extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addItemToCart: (cartPee, cartPeeCount, cartName, cartId, isPay) =>
-            dispatch({ type: 'ADD_TO_CART', cartPee: cartPee, cartPeeCount: cartPeeCount, cartName: cartName, cartId: cartId, isPay: isPay })
+        addItemToCart: (cartPee, cartPeeCount, cartName, cartId, isPay, brand, collection) =>
+            dispatch({ type: 'ADD_TO_CART', cartPee: cartPee, cartPeeCount: cartPeeCount, cartName: cartName, cartId: cartId, isPay: isPay, brand: brand, collection: collection })
     }
 }
 

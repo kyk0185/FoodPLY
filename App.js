@@ -17,6 +17,7 @@ import Payment from './Payment';
 import PaymentResults from './PaymentResults';
 import SearchModal from './SearchModal';
 import Certification from './Certification';
+import OrderList from './OrderList';
 
 const { store, persistor } = configureStore();
 const Drawer = createDrawerNavigator();
@@ -39,6 +40,7 @@ function DrawerComponent() {
       <Drawer.Screen name="Home" component={MainTop} options={{ drawerLabel: 'Home', drawerIcon: ({ focused, size }) => (<FontAwesome size={size} name={'home'} />) }}></Drawer.Screen>
       <Drawer.Screen name="Details" component={LoginAnJoin} options={{ drawerLabel: 'Users', drawerIcon: ({ focused, size }) => (<FontAwesome size={size} name={'users'} />) }}></Drawer.Screen>
       <Drawer.Screen name="ShoppingCart" component={ShoppingCart} options={{ drawerLabel: 'Cart', drawerIcon: ({ focused, size }) => (<FontAwesome size={size} name={'shopping-cart'} />) }}></Drawer.Screen>
+      <Drawer.Screen name="OrderList" component={OrderList} options={{ drawerLabel: 'Orders', drawerIcon: ({ focused, size }) => (<FontAwesome size={size} name={'motorcycle'} />) }}></Drawer.Screen>
     </Drawer.Navigator>
   )
 }
@@ -49,7 +51,7 @@ export default class App extends Component {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <NavigationContainer>
-            <Stack.Navigator headerMode="none" initialRouteName="Home"> 
+            <Stack.Navigator headerMode="none" initialRouteName="Home">
               <Stack.Screen name="Home" component={DrawerComponent} options={{ headerShown: false }}></Stack.Screen>
               <Stack.Screen name="FoodListDetails" component={FoodListDetails} options={{ headerShown: false }}></Stack.Screen>
               <Stack.Screen name="ShoppingCart" component={ShoppingCart} options={{ headerShown: false }}></Stack.Screen>

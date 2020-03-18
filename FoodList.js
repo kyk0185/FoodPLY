@@ -9,7 +9,7 @@ function FoodList(props) {
     return (
         <SafeAreaView style={{ padding: 10 }}>
             <View>
-                <TouchableOpacity onPress={() => navigation.navigate('FoodListDetails', { name: props.name, pee: props.pee })}>
+                <TouchableOpacity onPress={() => navigation.navigate('FoodListDetails', { name: props.name, pee: props.pee, collection: props.collection })}>
                     <Image source={props.imag} style={{ width: 170, height: 170 }} />
                     <Text style={{ fontSize: 20, color: 'black', marginBottom: 10 }}>{props.name}</Text>
                     <Text>{props.type}</Text>
@@ -27,11 +27,11 @@ export default function Food(props) {
             {data.map((dish, index) => {
                 if (dish.collection == props.collection) {
                     return (
-                        <FoodList key={dish.key} imag={dish} name={dish.name} type={dish.type} pee={dish.pee} location={dish.location} />
+                        <FoodList key={dish.key} imag={dish} name={dish.name} type={dish.type} pee={dish.pee} location={dish.location} collection={dish.collection} />
                     );
                 } else if (props.collection == '전체') {
                     return (
-                        <FoodList key={dish.key} imag={dish} name={dish.name} type={dish.type} pee={dish.pee} location={dish.location} />
+                        <FoodList key={dish.key} imag={dish} name={dish.name} type={dish.type} pee={dish.pee} location={dish.location} collection={dish.collection} />
                     );
                 }
             })}

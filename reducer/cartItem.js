@@ -4,7 +4,7 @@ import { AsyncStorage } from 'react-native';
 const carItems = (state = [], action) => {
     switch (action.type) {
         case 'ADD_TO_CART':
-            return [...state, { cartPee: action.cartPee, cartPeeCount: action.cartPeeCount, cartName: action.cartName, cartId: action.cartId, isPay: action.isPay }]
+            return [...state, { cartPee: action.cartPee, cartPeeCount: action.cartPeeCount, cartName: action.cartName, cartId: action.cartId, isPay: action.isPay, brand: action.brand, collection: action.collection }]
 
         case 'REMOVE_FROM_CART':
             return state.filter(items => items.cartId !== action.cartId)
@@ -37,7 +37,6 @@ const userInfo = (state = [], action) => {
         case 'ADD_USER_INFO':
             return { ...state, userData: action.userData }
         case 'MODI_USER_INFO':
-            console.log('reducer', state)
             return { ...state, userData: { ...state.userData, nickName: action.userData['nickName'], phone: action.userData['phone'], email: action.userData['email'] } }
     }
     return state
