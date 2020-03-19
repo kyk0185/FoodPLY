@@ -7,31 +7,9 @@ import { Ionicons } from '@expo/vector-icons';
 import { ScrollView } from 'react-native-gesture-handler';
 import ModalFoodDetails from './ModalFoodDetails';
 import { connect } from 'react-redux';
+import data from './FoodData';
 
 const { width, height } = Dimensions.get('window');
-const foodData = [
-    {
-        key: 1,
-        uri: 'https://i.pinimg.com/originals/32/0b/85/320b85477eccbd3ec891e69942b50729.png',
-        name: '양념치킨',
-        ref: '콜라(245ml)제공,토마토와 칠리...',
-        pee: 17900
-    },
-    {
-        key: 2,
-        uri: 'https://www.bhc.co.kr/upload/bhc/menu/410_0022_%EB%8B%AD%EB%8B%A4%EB%A6%AC%ED%9B%84%EB%9D%BC%EC%9D%B4%EB%93%9C(0).jpg',
-        name: '후라이드',
-        ref: '콜라(245ml)제공,바삭함 속에 감...',
-        pee: 17900
-    },
-    {
-        key: 3,
-        uri: 'https://i.pinimg.com/736x/40/28/94/40289415e3f10d4218586a596e251534.jpg',
-        name: '간장치킨',
-        ref: '콜라(245ml)제공,마늘과 간장의...',
-        pee: 18900
-    },
-]
 class FoodListDetails extends Component {
     constructor(props) {
         super(props)
@@ -79,21 +57,29 @@ class FoodListDetails extends Component {
             return (
                 <ScrollView>
                     <List>
-                        {foodData.map((dish, index) => {
-                            return (
-                                <ListItem thumbnail>
-                                    <Body>
-                                        <TouchableHighlight onPress={() => this.setModalVisible({ id: index, name: dish.name, ref: dish.ref, pee: dish.pee, uri: dish, brand: this.props.route.params['name'], collection: this.props.route.params['collection'] })}>
-                                            <Text>{dish.name}</Text>
-                                        </TouchableHighlight>
-                                        <Text style={{ marginTop: 10 }}>{dish.ref}</Text>
-                                        <Text>{dish.pee}원</Text>
-                                    </Body>
-                                    <Right>
-                                        <Thumbnail square large source={dish}></Thumbnail>
-                                    </Right>
-                                </ListItem>
-                            )
+                        {data.map((dish, index) => {
+                            {
+                                if (dish.name === this.props.route.params['name']) {
+                                    return (
+                                        dish.foodData.map((dishes, index) => {
+                                            return (
+                                                <ListItem thumbnail>
+                                                    <Body>
+                                                        <TouchableHighlight onPress={() => this.setModalVisible({ id: index, name: dishes.name, ref: dishes.ref, pee: dishes.pee, uri: dishes, brand: this.props.route.params['name'], collection: this.props.route.params['collection'] })}>
+                                                            <Text>{dishes.name}</Text>
+                                                        </TouchableHighlight>
+                                                        <Text style={{ marginTop: 10 }}>{dishes.ref}</Text>
+                                                        <Text>{dishes.pee}원</Text>
+                                                    </Body>
+                                                    <Right>
+                                                        <Thumbnail square large source={dishes}></Thumbnail>
+                                                    </Right>
+                                                </ListItem>
+                                            )
+                                        })
+                                    )
+                                }
+                            }
                         })}
                         <ListItem thumbnail>
                             <Body>
@@ -249,18 +235,26 @@ class FoodListDetails extends Component {
             <Container>
                 <Content>
                     <View style={{ width: width, height: height }}>
-                        <View style={{ width: width, height: '45%' }}>
-                            <DeckSwiper
-                                dataSource={foodData}
-                                renderItem={item =>
-                                    <Card >
-                                        <CardItem cardBody>
-                                            <Image source={item} style={{ height: 300, flex: 1 }} />
-                                        </CardItem>
-                                    </Card>
-                                } />
-                        </View>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                        {data.map((dish) => {
+                            {
+                                if (dish.name === this.props.route.params['name']) {
+                                    return (
+                                        <View style={{ width: width, height: '40%' }}>
+                                            <DeckSwiper
+                                                dataSource={dish.foodData}
+                                                renderItem={item =>
+                                                    <Card >
+                                                        <CardItem cardBody>
+                                                            <Image source={item} style={{ height: 300, flex: 1 }} />
+                                                        </CardItem>
+                                                    </Card>
+                                                } />
+                                        </View>
+                                    )
+                                }
+                            }
+                        })}
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', marginTop: 30 }}>
                             <Text>      </Text>
                             <Text style={{ fontSize: 25, marginHorizontal: 70 }}>{this.props.route.params['name']}</Text>
                             <Button transparent onPress={this.handleLike}>

@@ -18,6 +18,7 @@ import PaymentResults from './PaymentResults';
 import SearchModal from './SearchModal';
 import Certification from './Certification';
 import OrderList from './OrderList';
+import OrderListDetails from './OrderListDetails';
 
 const { store, persistor } = configureStore();
 const Drawer = createDrawerNavigator();
@@ -60,6 +61,7 @@ export default class App extends Component {
               <Stack.Screen name="PaymentResults" component={PaymentResults} options={{ headerShown: false }}></Stack.Screen>
               <Stack.Screen name="SearchModal" component={SearchModal}></Stack.Screen>
               <Stack.Screen name="Certification" component={Certification} options={{ headerShown: false }}></Stack.Screen>
+              <Stack.Screen name="OrderListDetails" component={OrderListDetails} options={{ headerShown: false }}></Stack.Screen>
             </Stack.Navigator>
           </NavigationContainer>
         </PersistGate>

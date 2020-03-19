@@ -6,7 +6,26 @@ const data = [
         type: '배달팁: 무료(16,000원 이상)',
         pee: '최소 주문금액: 8,000원',
         location: '0.1km',
-        collection: 'chicken'
+        collection: 'chicken',
+        foodData: [{
+            key: 1,
+            uri: 'https://i.pinimg.com/originals/32/0b/85/320b85477eccbd3ec891e69942b50729.png',
+            name: '양념치킨',
+            ref: '콜라(245ml)제공,토마토와 칠리...',
+            pee: 17900
+        }, {
+            key: 2,
+            uri: 'https://www.bhc.co.kr/upload/bhc/menu/410_0022_%EB%8B%AD%EB%8B%A4%EB%A6%AC%ED%9B%84%EB%9D%BC%EC%9D%B4%EB%93%9C(0).jpg',
+            name: '후라이드',
+            ref: '콜라(245ml)제공,바삭함 속에 감...',
+            pee: 17900
+        }, {
+            key: 3,
+            uri: 'https://i.pinimg.com/736x/40/28/94/40289415e3f10d4218586a596e251534.jpg',
+            name: '간장치킨',
+            ref: '콜라(245ml)제공,마늘과 간장의...',
+            pee: 18900
+        }]
     },
     {
         key: 2,
@@ -42,7 +61,26 @@ const data = [
         type: '배달팁: 무료(10,000원 이상)',
         pee: '최소 주문금액: 1,0000원',
         location: '5km',
-        collection: 'coffee'
+        collection: 'coffee',
+        foodData: [{
+            key: 1,
+            uri: 'https://img2.tmon.kr/cdn3/deals/2020/02/08/1539481602/1539481602_front_2ee90_fc191.jpg',
+            name: '블랙 밀크티',
+            ref: '진한 향과 맛을 느낄 수 있는 블랙티(홍차)와 밀크의 만남',
+            pee: 4000
+        }, {
+            key: 2,
+            uri: 'https://www.gong-cha.co.kr/uploads/product/20200107/6fgx2kKsC70cQFNH_20200107.png',
+            name: '딸기&요구르트 크러쉬 ',
+            ref: '얼그레이티로 만든 딸기,피나콜라다 크러쉬에 리얼 과즙 딸기 쥬얼리를 더한 음료입니다.',
+            pee: 5500
+        }, {
+            key: 3,
+            uri: 'https://www.gong-cha.co.kr/uploads/product/20180102/MxdE3F9Wt7cvfnRU_20180102.jpg',
+            name: '제주 그린티 스무디',
+            ref: '녹차가루와 부드러운 밀크폼을 함께 즐길 수 있는 제주 그린티 스무디',
+            pee: 5300
+        }]
     },
     {
         key: 6,
@@ -143,7 +181,6 @@ const data = [
         location: '2km',
         collection: 'chicken'
     }
-
 ]
 
 export default data

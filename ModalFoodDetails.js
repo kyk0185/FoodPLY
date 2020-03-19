@@ -66,7 +66,7 @@ class ModalFoodDetails extends Component {
                     </View>
                     <View style={{ width: width, height: '7%', backgroundColor: 'gray', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                         <Text style={{ marginLeft: 20, color: 'white' }}>메뉴금액</Text>
-                        <Text style={{ marginRight: 20, color: 'white' }}>{this.props.pee}원</Text>
+                        <Text style={{ marginRight: 20, color: 'white' }}>{this.state.pee}원</Text>
                     </View>
                     <View style={{ width: width, height: '10%' }}>
                         <Button block iconLeft onPress={() => this.props.addItemToCart(this.state.pee, this.state.peeCount, this.props.name, this.props.id, false, this.props.brand, this.props.collection)}>

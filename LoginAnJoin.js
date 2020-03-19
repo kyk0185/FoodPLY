@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Dimensions, Modal } from 'react-native';
+import { View, Dimensions, Modal, TouchableHighlight } from 'react-native';
 import { Container, Content, Button, Text, Form, Label, Item, Input, Picker, Icon, Left, Right, Body, Title, Header } from 'native-base';
 import { connect } from 'react-redux';
 import * as SQLite from 'expo-sqlite';
@@ -323,6 +323,9 @@ class LoginAnJoin extends React.Component {
                                     onRequestClose={() => {
                                         alert('Modal has been closed.')
                                     }}>
+                                    <View style={{ alignItems: 'flex-end', padding: 10 }}>
+                                        <TouchableHighlight onPress={() => this.setState({ modalVisible: !this.state.modalVisible })}><Text style={{ fontSize: 15 }}>취소</Text></TouchableHighlight>
+                                    </View>
                                     <Form style={{ marginTop: 10 }}>
                                         <Item stackedLabel>
                                             <Label>아이디</Label>

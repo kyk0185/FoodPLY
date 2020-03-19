@@ -104,7 +104,7 @@ class MainTop extends React.Component {
                         <MaterialIcons name="location-on" size={30} color="#2ECCFA" />
                         <TouchableOpacity onPress={() => this.setModalVisible()}><Text style={{ fontWeight: 'bold', color: 'black' }}>배송지</Text></TouchableOpacity>
                         <Text style={{ fontWeight: 'bold', marginLeft: 10 }}>|</Text>
-                        <Text style={{ fontSize: 15, marginLeft: 10 }}>{this.props.geoData.geoItems['geoData']}</Text>
+                        <Text style={{ fontSize: 15, marginLeft: 10, color: 'black' }}>{this.props.geoData.geoItems['geoData']}</Text>
                     </Left>
                 </Footer>
                 <View style={{ marginTop: 22 }}>

@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         borderWidth: 1
     },
     subText: {
-        color: 'rgba(0,0,0,0.5)'
+        color: '#424242'
     },
     eachItems: {
         borderBottomWidth: 0.5,

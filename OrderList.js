@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Container, Content, Button, Text, Right, List, ListItem, Left, Header, Body, Title, Icon } from 'native-base';
@@ -85,7 +84,7 @@ class OrderList extends Component {
                                         <Button style={{ flex: 1, borderColor: '#A4A4A4', borderWidth: 1 }} block transparent onPress={() => this.props.navigation.navigate('FoodListDetails', { name: dish.brand, pee: '8,000원', collection: dish.collection })}>
                                             <Text style={{ color: 'black', fontWeight: '300', fontSize: 17 }}>가게 상세</Text>
                                         </Button>
-                                        <Button style={{ flex: 1, borderColor: '#A4A4A4', borderWidth: 1 }} block transparent>
+                                        <Button style={{ flex: 1, borderColor: '#A4A4A4', borderWidth: 1 }} block transparent onPress={() => this.props.navigation.navigate('OrderListDetails', { name: dish.brand, cartName: dish.cartName, count: dish.count })}>
                                             <Text style={{ color: 'black', fontWeight: '300', fontSize: 17 }}>주문 내역</Text>
                                         </Button>
                                     </View>

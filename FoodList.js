@@ -12,9 +12,9 @@ function FoodList(props) {
                 <TouchableOpacity onPress={() => navigation.navigate('FoodListDetails', { name: props.name, pee: props.pee, collection: props.collection })}>
                     <Image source={props.imag} style={{ width: 170, height: 170 }} />
                     <Text style={{ fontSize: 20, color: 'black', marginBottom: 10 }}>{props.name}</Text>
-                    <Text>{props.type}</Text>
-                    <Text>{props.pee}</Text>
-                    <Text>{props.location}</Text>
+                    <Text style={{ color: '#424242' }}>{props.type}</Text>
+                    <Text style={{ color: '#424242' }}>{props.pee}</Text>
+                    <Text style={{ color: '#424242' }}>{props.location}</Text>
                 </TouchableOpacity>
             </View>
         </SafeAreaView>
