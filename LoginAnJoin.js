@@ -3,6 +3,7 @@ import { View, Dimensions, Modal, TouchableHighlight } from 'react-native';
 import { Container, Content, Button, Text, Form, Label, Item, Input, Picker, Icon, Left, Right, Body, Title, Header } from 'native-base';
 import { connect } from 'react-redux';
 import * as SQLite from 'expo-sqlite';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 import MyPage from './MyPage';
 
 const db = SQLite.openDatabase("testds.db");
@@ -22,8 +23,6 @@ class LoginAnJoin extends React.Component {
             nickName: "",
             phone: "",
             loginForm: false,
-            loginDisabled: false,
-            joinDisabled: false,
             birth1: "",
             birth2: undefined,
             birth3: "",
@@ -39,7 +38,8 @@ class LoginAnJoin extends React.Component {
         this.setState({ gender: value })
     }
     joinToggle = () => {
-        this.setState({ joinForm: !this.state.joinForm, modalVisible: !this.state.modalVisible })
+        this.setState({ modalVisible: !this.state.modalVisible })
+        console.log('modal', this.state.modalVisible)
     }
 
     idForm = (text) => {
@@ -73,7 +73,7 @@ class LoginAnJoin extends React.Component {
     logout = () => {
         this.props.clearUserInfo()
         alert('로그아웃 되셨습니다.!')
-        this.setState({ isLogin: !this.state.isLogin, id: "", password: "" })
+        this.setState({ isLogin: !this.state.isLogin, id: "", password: "", nickName: "", email: "", phone: "" })
         this.props.navigation.navigate('Home')
     }
 
@@ -100,7 +100,7 @@ class LoginAnJoin extends React.Component {
                 console.log("Received error: ", error.message);
                 throw error;
             }
-        } else {
+        } else if (this.state.id !== "") {
             alert('올바른 형식에 맞추어 주십시오.')
         }
     }
@@ -128,7 +128,7 @@ class LoginAnJoin extends React.Component {
                 console.log("Received error: ", error.message);
                 throw error;
             }
-        } else {
+        } else if (this.state.email !== "") {
             alert('올바른 형식에 맞추어 주십시오.')
         }
     }
@@ -156,7 +156,7 @@ class LoginAnJoin extends React.Component {
                 console.log("Received error: ", error.message);
                 throw error;
             }
-        } else {
+        } else if (this.state.nickName !== "") {
             alert('올바른 형식에 맞추어 주십시오.')
         }
     }
@@ -171,6 +171,7 @@ class LoginAnJoin extends React.Component {
     checkPasswordConfirm = () => {
         if (this.state.password != this.state.passwordConfirm & this.state.password != "" & this.state.passwordConfirm != "") {
             alert('비밀번호가 일치하지 않습니다.')
+            this.setState({ passwordConfirm: "" })
         }
     }
     loginSubmit = () => {
@@ -217,6 +218,7 @@ class LoginAnJoin extends React.Component {
             & this.state.birth1 !== "" & this.state.birth2 !== "" & this.state.birth3 !== "") {
             try {
                 let temp = [];
+
                 temp.push(this.state.email);
                 temp.push(this.state.nickName);
                 temp.push(this.state.password);
@@ -229,7 +231,7 @@ class LoginAnJoin extends React.Component {
                     tx.executeSql(`INSERT INTO users (email,nickName,password,id,gender,phone,birthday) VALUES (?,?,?,?,?,?,?);`, temp, (tx, results) => {
                         if (results.rowsAffected > 0) {
                             alert('회원이 등록 되셨습니다.')
-                            this.setState({ email: "", nickName: "", password: "", passwordConfirm: "", joinForm: !this.state.joinForm, loginDisabled: !this.state.loginDisabled })
+                            this.setState({ id: "", email: "", nickName: "", password: "", passwordConfirm: "", gender: "", phone: "", birth1: "", birth2: "", birth3: "", modalVisible: !this.state.modalVisible })
                         } else {
                             alert('회원 등록이 실패하셨습니다.')
                         }
@@ -310,22 +312,28 @@ class LoginAnJoin extends React.Component {
                                     <Button onPress={this.loginSubmit} block>
                                         <Text>로그인</Text>
                                     </Button>
-                                    <Button onPress={this.joinToggle} disabled={this.state.joinDisabled} block info>
+                                    <Button onPress={this.joinToggle} block info>
                                         <Text>회원가입</Text>
                                     </Button>
                                 </View>
                             </Form>
-                            {this.state.joinForm &&
-                                <Modal
-                                    animationType="slide"
-                                    transparent={false}
-                                    visible={this.state.modalVisible}
-                                    onRequestClose={() => {
-                                        alert('Modal has been closed.')
-                                    }}>
-                                    <View style={{ alignItems: 'flex-end', padding: 10 }}>
-                                        <TouchableHighlight onPress={() => this.setState({ modalVisible: !this.state.modalVisible })}><Text style={{ fontSize: 15 }}>취소</Text></TouchableHighlight>
-                                    </View>
+                            {/* {this.state.joinForm && */}
+                            <Modal
+                                animationType="slide"
+                                transparent={false}
+                                visible={this.state.modalVisible}
+                                onRequestClose={() => {
+                                    alert('Modal has been closed.')
+                                }}>
+                                <View style={{ alignItems: 'flex-end', padding: 10 }}>
+                                    <TouchableHighlight onPress={() => this.setState({ modalVisible: !this.state.modalVisible })}><Text style={{ fontSize: 15 }}>취소</Text></TouchableHighlight>
+                                </View>
+                                <KeyboardAwareScrollView
+                                    enableOnAndroid
+                                    enableAutomaticScroll
+                                    keyboardOpeningTime={0}
+                                    extraHeight={Platform.select({ android: 200 })}
+                                >
                                     <Form style={{ marginTop: 10 }}>
                                         <Item stackedLabel>
                                             <Label>아이디</Label>
@@ -359,7 +367,6 @@ class LoginAnJoin extends React.Component {
                                                     placeholderTextColor="#d3d3d3"
                                                     selectedValue={this.state.birth2}
                                                     onValueChange={this.onValueChange2.bind(this)}>
-
                                                     <Picker.Item label="1월" value="01" />
                                                     <Picker.Item label="2월" value="02" />
                                                     <Picker.Item label="3월" value="03" />
@@ -401,8 +408,9 @@ class LoginAnJoin extends React.Component {
                                             <Text>가입하기</Text>
                                         </Button>
                                     </Form>
-                                </Modal>
-                            }
+                                </KeyboardAwareScrollView>
+                            </Modal>
+                            {/* } */}
                         </View>
                     }
                 </Content>

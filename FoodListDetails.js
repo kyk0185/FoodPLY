@@ -51,6 +51,7 @@ class FoodListDetails extends Component {
 
     setModalVisible(visible) {
         this.setState({ modalVisible: !this.state.modalVisible, modalId: visible.id, modalName: visible.name, modalRef: visible.ref, modalPee: visible.pee, modalUri: visible.uri['uri'], modalBrand: visible.brand, modalCollection: visible.collection })
+        console.log('modal', this.state.modalVisible)
     }
     renderSection = () => {
         if (this.state.activeIndex == 0) {
