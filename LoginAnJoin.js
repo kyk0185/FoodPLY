@@ -32,10 +32,14 @@ class LoginAnJoin extends React.Component {
     }
 
     onValueChange2(value: string) {
-        this.setState({ birth2: value })
+        if (value !== 0) {
+            this.setState({ birth2: value })
+        }
     }
     onValueChange3(value: string) {
-        this.setState({ gender: value })
+        if (value !== 0) {
+            this.setState({ gender: value })
+        }
     }
     joinToggle = () => {
         this.setState({ modalVisible: !this.state.modalVisible })
@@ -215,7 +219,7 @@ class LoginAnJoin extends React.Component {
 
     joinSubmit = () => {
         if (this.state.email !== "" & this.state.nickName !== "" & this.state.password !== "" & this.state.id !== "" & this.state.gender !== "" & this.state.phone !== ""
-            & this.state.birth1 !== "" & this.state.birth2 !== "" & this.state.birth3 !== "") {
+            & this.state.birth1 !== "" & this.state.birth2 !== "" & this.state.birth3 !== "" & this.state.birth2 !== undefined & this.state.gender !== undefined) {
             try {
                 let temp = [];
 
@@ -317,7 +321,6 @@ class LoginAnJoin extends React.Component {
                                     </Button>
                                 </View>
                             </Form>
-                            {/* {this.state.joinForm && */}
                             <Modal
                                 animationType="slide"
                                 transparent={false}
@@ -326,7 +329,7 @@ class LoginAnJoin extends React.Component {
                                     alert('Modal has been closed.')
                                 }}>
                                 <View style={{ alignItems: 'flex-end', padding: 10 }}>
-                                    <TouchableHighlight onPress={() => this.setState({ modalVisible: !this.state.modalVisible })}><Text style={{ fontSize: 15 }}>취소</Text></TouchableHighlight>
+                                    <TouchableHighlight onPress={() => this.setState({ modalVisible: !this.state.modalVisible, id: "", password: "" })}><Text style={{ fontSize: 15 }}>취소</Text></TouchableHighlight>
                                 </View>
                                 <KeyboardAwareScrollView
                                     enableOnAndroid
@@ -363,10 +366,9 @@ class LoginAnJoin extends React.Component {
                                                     mode="dropdown"
                                                     iosIcon={<Icon name="arrow-down" />}
                                                     style={{ width: undefined }}
-                                                    placeholder="월"
-                                                    placeholderTextColor="#d3d3d3"
                                                     selectedValue={this.state.birth2}
                                                     onValueChange={this.onValueChange2.bind(this)}>
+                                                    <Picker.Item label="월" value="0" />
                                                     <Picker.Item label="1월" value="01" />
                                                     <Picker.Item label="2월" value="02" />
                                                     <Picker.Item label="3월" value="03" />
@@ -394,7 +396,7 @@ class LoginAnJoin extends React.Component {
                                                     placeholderTextColor="#d3d3d3"
                                                     selectedValue={this.state.gender}
                                                     onValueChange={this.onValueChange3.bind(this)}>
-
+                                                    <Picker.Item label="성별" value="0" />
                                                     <Picker.Item label="남자" value="key0" />
                                                     <Picker.Item label="여자" value="key1" />
                                                 </Picker>
@@ -410,7 +412,6 @@ class LoginAnJoin extends React.Component {
                                     </Form>
                                 </KeyboardAwareScrollView>
                             </Modal>
-                            {/* } */}
                         </View>
                     }
                 </Content>

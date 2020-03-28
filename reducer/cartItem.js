@@ -7,7 +7,7 @@ const carItems = (state = [], action) => {
             return [...state, { cartPee: action.cartPee, cartPeeCount: action.cartPeeCount, cartName: action.cartName, cartId: action.cartId, isPay: action.isPay, brand: action.brand, collection: action.collection }]
 
         case 'REMOVE_FROM_CART':
-            return state.filter(items => items.cartId !== action.cartId)
+            return state.filter(items => items.cartName !== action.cartName)
 
         case 'MODIFY_FROM_CART':
             return state.map((dish, index) => {

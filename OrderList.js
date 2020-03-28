@@ -27,15 +27,18 @@ class OrderList extends Component {
     }
     render() {
         const reduced = this.props.cartItems.carItems.reduce(function (acc, obj) {
-            if (!acc[obj.brand]) {
-                acc[obj.brand] = { ...obj, count: 1 };
+            var groupId = obj.brand
+            if (obj.isPay === true) {
+                groupId = groupId + '-' + obj.isPay
+            }
+
+            if (!acc[groupId]) {
+                acc[groupId] = { ...obj };
 
                 return acc
             }
-            acc[obj.brand].cartPee += obj.cartPee
-            acc[obj.brand].cartPeeCount += obj.cartPeeCount
-            acc[obj.brand].count += 1
-
+            acc[groupId].cartPee += obj.cartPee
+            acc[groupId].cartPeeCount += obj.cartPeeCount
             return acc
         }, {})
 
@@ -44,8 +47,7 @@ class OrderList extends Component {
             return {
                 brand: items.brand,
                 cartPee: items.cartPee,
-                cartPeeCount: items.cartPeeCount,
-                count: items.count - 1,
+                cartPeeCount: items.cartPeeCount - 1,
                 cartName: items.cartName,
                 collection: items.collection,
                 isPay: items.isPay
@@ -75,7 +77,7 @@ class OrderList extends Component {
                                             <View style={{ flexDirection: 'row' }}>
                                                 <Text style={{ fontSize: 18, fontWeight: '600' }}>{dish.cartName}</Text>
                                                 <Text style={{ fontSize: 18, fontWeight: '600' }}>외</Text>
-                                                <Text style={{ fontSize: 18, fontWeight: '600' }}>{dish.count}개</Text>
+                                                <Text style={{ fontSize: 18, fontWeight: '600' }}>{dish.cartPeeCount}개</Text>
                                                 <Text style={{ fontSize: 18, fontWeight: '600' }}>{dish.cartPee}원</Text>
                                             </View>
                                         </Body>
@@ -84,7 +86,7 @@ class OrderList extends Component {
                                         <Button style={{ flex: 1, borderColor: '#A4A4A4', borderWidth: 1 }} block transparent onPress={() => this.props.navigation.navigate('FoodListDetails', { name: dish.brand, pee: '8,000원', collection: dish.collection })}>
                                             <Text style={{ color: 'black', fontWeight: '300', fontSize: 17 }}>가게 상세</Text>
                                         </Button>
-                                        <Button style={{ flex: 1, borderColor: '#A4A4A4', borderWidth: 1 }} block transparent onPress={() => this.props.navigation.navigate('OrderListDetails', { name: dish.brand, cartName: dish.cartName, count: dish.count })}>
+                                        <Button style={{ flex: 1, borderColor: '#A4A4A4', borderWidth: 1 }} block transparent onPress={() => this.props.navigation.navigate('OrderListDetails', { name: dish.brand, cartName: dish.cartName, cartPeeCount: dish.cartPeeCount })}>
                                             <Text style={{ color: 'black', fontWeight: '300', fontSize: 17 }}>주문 내역</Text>
                                         </Button>
                                     </View>

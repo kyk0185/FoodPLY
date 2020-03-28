@@ -58,6 +58,33 @@ class ShoppingCart extends Component {
         }
     }
     render() {
+
+        const reduced = this.props.cartItems.carItems.reduce(function (acc, obj) {
+            var groupId = obj.cartName
+            if (obj.isPay === false) {
+                groupId = groupId + '-' + obj.isPay
+            }
+
+            if (!acc[groupId]) {
+                acc[groupId] = { ...obj };
+
+                return acc
+            }
+            acc[groupId].cartPee += obj.cartPee
+            acc[groupId].cartPeeCount += obj.cartPeeCount
+
+            return acc
+        }, {})
+
+        const result = Object.keys(reduced).map(function (k) {
+            const items = reduced[k]
+            return {
+                cartPee: items.cartPee,
+                cartPeeCount: items.cartPeeCount,
+                cartName: items.cartName,
+                isPay: items.isPay
+            }
+        })
         return (
             <Container>
                 <Header androidStatusBarColor='transparent' style={{ backgroundColor: 'white', borderBottomWidth: 1, borderBottomColor: '#D8D8D8' }}>
@@ -69,7 +96,7 @@ class ShoppingCart extends Component {
                 </Header>
 
                 <Content>
-                    {this.props.cartItems.carItems.map((dish, index) => {
+                    {result.map((dish, index) => {
                         if (!dish.isPay) {
                             return (
                                 <List>
@@ -79,7 +106,7 @@ class ShoppingCart extends Component {
                                         </Left>
                                         <View style={{ flexDirection: 'row' }}>
                                             <Text>{dish.cartPeeCount}</Text>
-                                            <Button transparent onPress={() => this.props.removeItem(dish.cartId)} style={{ marginLeft: 20 }}>
+                                            <Button transparent onPress={() => this.props.removeItem(dish.cartName)} style={{ marginLeft: 20 }}>
                                                 <AntDesign name="closesquareo" size={20} color="gray" />
                                             </Button>
                                         </View>
@@ -125,7 +152,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchProps = (dispatch) => {
     return {
-        removeItem: (cartId) => dispatch({ type: 'REMOVE_FROM_CART', cartId: cartId })
+        removeItem: (cartName) => dispatch({ type: 'REMOVE_FROM_CART', cartName: cartName })
     }
 }
 

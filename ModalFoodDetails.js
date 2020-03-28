@@ -36,6 +36,17 @@ class ModalFoodDetails extends Component {
             peeCount: prevState['peeCount'] + 1
         }))
     }
+    addItemToCart = () => {
+        if (this.props.cartItems.carItems[0] === undefined) {
+            this.props.addItemToCart(this.state.pee, this.state.peeCount, this.props.name, this.props.id, false, this.props.brand, this.props.collection)
+        } else if (this.props.cartItems.carItems[0] !== undefined) {
+            if (this.props.cartItems.carItems[0].brand === this.props.brand | this.props.cartItems.carItems[0].isPay === true) {
+                this.props.addItemToCart(this.state.pee, this.state.peeCount, this.props.name, this.props.id, false, this.props.brand, this.props.collection)
+            } else {
+                alert('장바구니에는 같은 가게의 메뉴만 담을 수 있습니다.')
+            }
+        }
+    }
     render() {
         return (
             <View style={{ width: width, height: height }}>
@@ -69,7 +80,7 @@ class ModalFoodDetails extends Component {
                         <Text style={{ marginRight: 20, color: 'white' }}>{this.state.pee}원</Text>
                     </View>
                     <View style={{ width: width, height: '10%' }}>
-                        <Button block iconLeft onPress={() => this.props.addItemToCart(this.state.pee, this.state.peeCount, this.props.name, this.props.id, false, this.props.brand, this.props.collection)}>
+                        <Button block iconLeft onPress={this.addItemToCart}>
                             <AntDesign name="shoppingcart" size={25} color="white" />
                             <Text>장바구니담기</Text>
                         </Button>
@@ -79,7 +90,11 @@ class ModalFoodDetails extends Component {
         )
     }
 }
-
+const mapStateToProps = (state) => {
+    return {
+        cartItems: state
+    }
+}
 const mapDispatchToProps = (dispatch) => {
     return {
         addItemToCart: (cartPee, cartPeeCount, cartName, cartId, isPay, brand, collection) =>
@@ -87,5 +102,5 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(undefined, mapDispatchToProps)(ModalFoodDetails)
+export default connect(mapStateToProps, mapDispatchToProps)(ModalFoodDetails)
 

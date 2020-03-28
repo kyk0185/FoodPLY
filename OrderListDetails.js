@@ -52,16 +52,13 @@ class OrderListDetails extends Component {
                                 <View style={{ flexDirection: 'row' }}>
                                     <Text style={{ fontSize: 18, fontWeight: '600' }}>{this.props.route.params['cartName']}</Text>
                                     <Text style={{ fontSize: 18, fontWeight: '600' }}>외</Text>
-                                    <Text style={{ fontSize: 18, fontWeight: '600' }}>{this.props.route.params['count']}개</Text>
+                                    <Text style={{ fontSize: 18, fontWeight: '600' }}>{this.props.route.params['cartPeeCount']}개</Text>
                                 </View>
                             </Body>
                         </ListItem>
                         <View style={{ flexDirection: 'row', flex: 2, padding: 10 }}>
                             <Button style={{ flex: 1, borderColor: '#A4A4A4', borderWidth: 1 }} block transparent>
                                 <Text style={{ color: 'black', fontWeight: '300', fontSize: 17 }}>가게 전화</Text>
-                            </Button>
-                            <Button style={{ flex: 1, borderColor: '#A4A4A4', borderWidth: 1 }} block transparent onPress={() => this.props.navigation.navigate('FoodListDetails', { name: dish.brand, pee: '8,000원', collection: dish.collection })}>
-                                <Text style={{ color: 'black', fontWeight: '300', fontSize: 17 }}>가게 상세</Text>
                             </Button>
                         </View>
                         <View style={styles.lineStyle} />

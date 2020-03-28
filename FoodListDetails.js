@@ -51,7 +51,6 @@ class FoodListDetails extends Component {
 
     setModalVisible(visible) {
         this.setState({ modalVisible: !this.state.modalVisible, modalId: visible.id, modalName: visible.name, modalRef: visible.ref, modalPee: visible.pee, modalUri: visible.uri['uri'], modalBrand: visible.brand, modalCollection: visible.collection })
-        console.log('modal', this.state.modalVisible)
     }
     renderSection = () => {
         if (this.state.activeIndex == 0) {
@@ -78,6 +77,8 @@ class FoodListDetails extends Component {
                                                 </ListItem>
                                             )
                                         })
+
+
                                     )
                                 }
                             }
@@ -217,10 +218,21 @@ class FoodListDetails extends Component {
             )
         } else {
             return (
-                <Button dark onPress={() => this.props.navigation.navigate('GoToOrder')} >
+                <Button dark onPress={this.goToOrder} >
                     <Text style={{ fontSize: 13, fontWeight: 'bold', color: 'white' }}>주문하기</Text>
                 </Button>
             )
+        }
+    }
+    goToOrder = () => {
+        if (this.props.cartItems.geoItems == "") {
+            alert('배송지 설정 해주세요.')
+            this.props.navigation.navigate('Home')
+        } else if (this.props.cartItems.userInfo.userData == undefined) {
+            alert('로그인 해주세요.')
+            this.props.navigation.navigate('Details')
+        } else {
+            this.props.navigation.navigate('GoToOrder')
         }
     }
     goCartList = () => {
