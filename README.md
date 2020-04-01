@@ -5,7 +5,7 @@
  Screenshots
  -----------
 
-<img src="https://user-images.githubusercontent.com/14154588/78143384-2935c800-7469-11ea-8b6c-6329dea5e492.PNG" width="450px" height="300px" title="px(픽셀) 크기 설정" alt="RubberDuck"></img><br/>
+<img src="https://user-images.githubusercontent.com/14154588/78143384-2935c800-7469-11ea-8b6c-6329dea5e492.PNG" width="100px" height="100px" title="px(픽셀) 크기 설정" alt="RubberDuck"></img>
 <img src="https://user-images.githubusercontent.com/14154588/78143799-b24cff00-7469-11ea-8aa7-ad2de9c06874.PNG" width="450px" height="300px" title="px(픽셀) 크기 설정" alt="RubberDuck"></img><br/>
 <img src="https://user-images.githubusercontent.com/14154588/78143825-b9740d00-7469-11ea-9a0a-e4345d30e243.PNG" width="450px" height="300px" title="px(픽셀) 크기 설정" alt="RubberDuck"></img><br/>
 
